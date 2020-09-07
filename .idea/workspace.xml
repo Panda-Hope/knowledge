@@ -19,8 +19,8 @@
         <entry file="file://$PROJECT_DIR$/Node 开发之 Koa运行机制与原理剖析.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="375">
-                <caret line="123" selection-start-line="123" selection-end-line="123" />
+              <first_editor relative-caret-position="371">
+                <caret line="125" selection-start-line="125" selection-end-line="125" />
               </first_editor>
               <second_editor />
             </state>
@@ -105,12 +105,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599441205067</updated>
-      <workItem from="1599441208738" duration="15621000" />
+      <workItem from="1599441208738" duration="15790000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15621000" />
+    <option name="totallyTimeSpent" value="15790000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -165,8 +165,8 @@
     <entry file="file://$PROJECT_DIR$/Node 开发之 Koa运行机制与原理剖析.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="375">
-            <caret line="123" selection-start-line="123" selection-end-line="123" />
+          <first_editor relative-caret-position="371">
+            <caret line="125" selection-start-line="125" selection-end-line="125" />
           </first_editor>
           <second_editor />
         </state>
