@@ -168,7 +168,10 @@ Response类与Request类似，除却一些基本信息的获取，还增添了�
 	// /users/3 => {"id": 3, "name": "Alex"}
 	// /users/3/friends => [{"id": 4, "name": "TJ"}]
 	```
-	
+	#### 回顾：
+	这里主要介绍了Koa-Router的基本实现以及一些特性功能，<br>
+	作为一个典型的Koa中间件，Koa-Router实现了从路由接受到操作分发处理的全部流程。	
+
 
 ## 总结：
 Koa是个高效、轻量级的Node开发框架，Koa的源码并不复杂，却刚好能够满足HTTP应用开发中的基本功能。  
