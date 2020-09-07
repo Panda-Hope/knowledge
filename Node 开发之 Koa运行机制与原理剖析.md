@@ -34,9 +34,11 @@ Koa是一个轻量级的、更富有表现力的、可扩展性的高效便捷�
 
 #### 什么是Koa的中间件洋葱模型机制？
 - 中间件洋葱图：
-<img src="https://camo.githubusercontent.com/d80cf3b511ef4898bcde9a464de491fa15a50d06/68747470733a2f2f7261772e6769746875622e636f6d2f66656e676d6b322f6b6f612d67756964652f6d61737465722f6f6e696f6e2e706e67" alt="">
+	<br>
+	<img src="https://camo.githubusercontent.com/d80cf3b511ef4898bcde9a464de491fa15a50d06/68747470733a2f2f7261772e6769746875622e636f6d2f66656e676d6b322f6b6f612d67756964652f6d61737465722f6f6e696f6e2e706e67" alt="">
 - 中间件执行顺序图：
-<img src="https://raw.githubusercontent.com/koajs/koa/a7b6ed0529a58112bac4171e4729b8760a34ab8b/docs/middleware.gif">
+	<br>
+	<img src="https://raw.githubusercontent.com/koajs/koa/a7b6ed0529a58112bac4171e4729b8760a34ab8b/docs/middleware.gif">
 	
 	洋葱模型是指 通过ES6 Generator语法，所有的请求经过一个中间件的时候都会执行两次。  
 	洋葱模型使得Koa在处理中间件后置逻辑上更加便捷、高效，也使得语法更为简洁明了。
@@ -170,7 +172,7 @@ Response类与Request类似，除却一些基本信息的获取，还增添了�
 	```
 	#### 回顾：
 	这里主要介绍了Koa-Router的基本实现以及一些特性功能，<br>
-	作为一个典型的Koa中间件，Koa-Router实现了从路由接受到操作分发处理的全部流程。	
+	作为一个典型的Koa中间件，Koa-Router实现了从路由接受到操作分发处理的全部流程，为后续的Node开发打下了良好的铺垫。
 
 
 ## 总结：
