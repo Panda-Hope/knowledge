@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b736f077-277b-442c-826a-c75a1c9876bb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Node 开发之 Koa运行机制与原理剖析.md" beforeDir="false" afterPath="$PROJECT_DIR$/Node 开发之 Koa运行机制与原理剖析.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,8 +19,8 @@
         <entry file="file://$PROJECT_DIR$/Node 开发之 Koa运行机制与原理剖析.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="474">
-                <caret line="119" selection-start-line="119" selection-end-line="119" />
+              <first_editor relative-caret-position="488">
+                <caret line="171" column="8" lean-forward="true" selection-start-line="171" selection-start-column="8" selection-end-line="171" selection-end-column="8" />
               </first_editor>
               <second_editor />
             </state>
@@ -106,12 +105,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599441205067</updated>
-      <workItem from="1599441208738" duration="12450000" />
+      <workItem from="1599441208738" duration="14796000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12450000" />
+    <option name="totallyTimeSpent" value="14796000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -166,8 +165,8 @@
     <entry file="file://$PROJECT_DIR$/Node 开发之 Koa运行机制与原理剖析.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="474">
-            <caret line="119" selection-start-line="119" selection-end-line="119" />
+          <first_editor relative-caret-position="488">
+            <caret line="171" column="8" lean-forward="true" selection-start-line="171" selection-start-column="8" selection-end-line="171" selection-end-column="8" />
           </first_editor>
           <second_editor />
         </state>

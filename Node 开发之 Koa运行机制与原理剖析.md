@@ -115,9 +115,60 @@ Response类与Request类似，除却一些基本信息的获取，还增添了�
 在Koa中中间件便是核心所在，这是Koa实际上处理HTTP请求并返回相应结果的地方。  
 这里我们将着重描述一下Koa-Router是如何运行的？
 
-##### 首先我们看下Koa-Router的一些基本数据结构：
+##### 首先我们看下Koa-Router的一些基本结构：
 <img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/image.png" />
+与Koa的中间件相同，Koa-Router的路由也同样是一个依次调用的队列，  
+每当我们注册一个路由时，Koa-Router便会注册一个新的Route对象并将其推入Stack队列中，  
+而每一层Route中会存在一个对应的Layer，Layer负责对路由规则进行解析与匹配(遵循path-to-regexp规则)，并执行对应路由上的函数操作。
 
+
+在了解到路由的一些基本结构后，我们来看看Koa-Router还有哪些其他特点：
+- 路由前缀补齐：
+	```javascript
+  router.prefix('/things/:thing_id')
+  ```
+- 路由嵌套：
+	```javascript
+	var forums = new Router();
+	var posts = new Router();
+	
+	posts.get('/', (ctx, next) => {...});
+	posts.get('/:pid', (ctx, next) => {...});
+	forums.use('/forums/:fid/posts', posts.routes(), posts.allowedMethods());
+	// responds to "/forums/123/posts" and "/forums/123/posts/123"
+	app.use(forums.routes());
+	```
+- Options请求与405、501响应处理：
+	```javascript
+	var Koa = require('koa');
+	var Router = require('koa-router');
+	
+	var app = new Koa();
+	var router = new Router();
+	
+	app.use(router.routes());
+	app.use(router.allowedMethods());
+	```
+- Param路由参数生成指定路由：
+	```javascript
+	router
+	.param('user', (id, ctx, next) => {
+	  ctx.user = users[id];
+	  if (!ctx.user) return ctx.status = 404;
+	  return next();
+	})
+	.get('/users/:user', ctx => {
+	  ctx.body = ctx.user;
+	})
+	.get('/users/:user/friends', ctx => {
+	  return ctx.user.getFriends().then(function(friends) {
+	    ctx.body = friends;
+	  });
+	})
+	// /users/3 => {"id": 3, "name": "Alex"}
+	// /users/3/friends => [{"id": 4, "name": "TJ"}]
+	```
+	
 
 ## 总结：
 Koa是个高效、轻量级的Node开发框架，Koa的源码并不复杂，却刚好能够满足HTTP应用开发中的基本功能。  
