@@ -1,5 +1,6 @@
 ## 序言：
-本篇是Node开发介绍的第一篇，主要是介绍Node开发框架 Koa以及Koa-router的运行原理。也是后续Egg.js(基于Koa衍生的Node企业级框架)篇章介绍的前站。
+本篇是Node开发介绍的第一篇，主要是介绍Node开发框架 Koa以及Koa-router的运行原理。  
+也是后续Egg.js(基于Koa衍生的Node企业级框架)篇章介绍的前站。
 
 ## 介绍：
 ##### Koa框架是什么?  
@@ -36,13 +37,73 @@ Koa是一个轻量级的、更富有表现力的、可扩展性的高效便捷�
 - 中间件执行顺序图：
 <img src="https://raw.githubusercontent.com/koajs/koa/a7b6ed0529a58112bac4171e4729b8760a34ab8b/docs/middleware.gif">
 
-通过ES6 Generator语法 所有的请求经过一个中间件的时候都会执行两次，洋葱模型使得Koa在处理中间件后置逻辑上更加便捷、高效
+洋葱模型是指 通过ES6 Generator语法，所有的请求经过一个中间件的时候都会执行两次。  
+洋葱模型使得Koa在处理中间件后置逻辑上更加便捷、高效，也使得语法更为简洁明了。
 
 ## 模块介绍：
 ##### Context(上下文运行环境)：
+这是Koa运行的上下文环境，也是Koa Application类其自身, 主要功能包含有：
+- 应用的创建
+	Koa Constructor构造函数完成了Koa类的一些基本属性例如：proxy、subdomainOffset、maxIpsCount的初始化，  
+	以及通过delegate来完成Context、Request以及Response类的预装载，以减轻后续每次HTTP请求所需创建的资源。
+- HTTP请求的监听与处理  
+	在Koa，HTTP请求的处理由callBack以及handleRequest来处理：
+```$xslt
+/**
+   * Return a request handler callback
+   * for node's native http server.
+   *
+   * @return {Function}
+   * @api public
+   */
+
+  callback() {
+    const fn = compose(this.middleware);
+
+    if (!this.listenerCount('error')) this.on('error', this.onerror);
+
+    const handleRequest = (req, res) => {
+      const ctx = this.createContext(req, res);
+      return this.handleRequest(ctx, fn);
+    };
+
+    return handleRequest;
+  }
+
+  /**
+   * Handle request in callback.
+   *
+   * @api private
+   */
+
+  handleRequest(ctx, fnMiddleware) {
+    const res = ctx.res;
+    res.statusCode = 404;
+    const onerror = err => ctx.onerror(err);
+    const handleResponse = () => respond(ctx);
+    onFinished(res, onerror);
+    return fnMiddleware(ctx).then(handleResponse).catch(onerror);
+  }
+```
+callback负责对API请求的处理，每当有请求接收到时，callback将会基于Req和Res创建一个新的上下文作用域，  
+并将中间件通过middleware进行组装，传递给handleRequest进行处理。  
+handleRequest被调用开始依序调用相应中间件，开始对API请求作出相应处理，同时监听此过程中发生的错误，最后对HTTP返回的内容数据进行统一的格式化处理。  
+最终完成了一个API请求，到中间件处理，最后返回的过程。
+	
+- 中间件的装载  
+	顾名思义，此模块是为了完成对于Koa中间件的装载而存在的，  
+	在Koa中中间件是一个依序加载的队列，也因此装载的过程也十分简单，将需要执行的中间件推入队列中即可`this.middleware.push(fn)`。
 
 ##### Request(HTTP 请求封装)：
+Request类是Koa基于HTTP Req上进行的二次封装，主要包含以下功能：
+- header 请求头的获取与设置
+- 请求url、origin、href、method以及host等HTTP信息的访问
+- IP、secure、subdomains、accept等辅助支持类相关信息的访问
 
 ##### Response(HTTP 返回封装)：
 
 ##### 中间件(Koa-Router)：
+
+## 总结：
+Koa是个高效、轻量级的Node开发框架，Koa的源码并不复杂，却刚好能够满足HTTP应用开发中的基本功能。  
+基于async/await（generator）的中间件洋葱模型使得Koa不仅能够摆脱传统Node开发中回调地狱的问题，也使得在此之上的扩展更为便捷，这也为基于Koa开发的Egg.js框架提供了足够的基本功能。
