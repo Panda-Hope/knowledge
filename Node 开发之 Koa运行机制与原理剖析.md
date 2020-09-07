@@ -13,9 +13,9 @@ Koa是一个轻量级的、更富有表现力的、可扩展性的高效便捷�
 
 ## 总览：
 #### Koa是如何运行的？
-
+首先让我们来看下一张图
 <div align="space-between">
-  <img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/koa.png" width="860" height="420">
+  <img src="https://pubimg.xingren.com/59ebc196-bd50-49b5-8ac4-c47c342378c8.png" width="860" height="420">
 </div>
 
 以上便是Koa的运行机制图，主要分为以下几个步骤：
@@ -116,7 +116,7 @@ Response类与Request类似，除却一些基本信息的获取，还增添了�
 这里我们将着重描述一下Koa-Router是如何运行的？
 
 #### 首先我们看下Koa-Router的一些基本结构：
-<img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/image.png" />
+<img src="https://pubimg.xingren.com/8254e23b-a691-402e-8385-dd4368b62ba9.png" />
 与Koa的中间件相同，Koa-Router的路由也同样是一个依次调用的队列，<br>  
 每当我们注册一个路由时，Koa-Router便会注册一个新的Route对象并将其推入Stack队列中, <br> 
 而每一层Route中会存在一个对应的Layer，Layer负责对路由规则进行解析与匹配(遵循path-to-regexp规则)，并执行对应路由上的函数操作。
