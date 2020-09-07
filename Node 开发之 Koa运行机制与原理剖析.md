@@ -29,7 +29,7 @@ Koa是一个轻量级的、更富有表现力的、可扩展性的高效便捷�
 - Request(HTTP 请求封装)：  
 	Request对象基于node原生req封装了一系列便利属性和方法，供处理请求时调用
 - Response(HTTP 返回封装)：  
-	Response对象与Request对象类似，除却一下基本属性的封装外，Response还提供了对数据返回、HTTP返回头设置、路由重定向等功能
+	Response对象与Request对象类似，除却一些基本属性的封装外，Response还提供了对数据返回、HTTP返回头设置、路由重定向等功能
 
 ##### 什么是Koa的中间件洋葱模型机制？
 - 中间件洋葱图：
@@ -41,7 +41,7 @@ Koa是一个轻量级的、更富有表现力的、可扩展性的高效便捷�
 洋葱模型使得Koa在处理中间件后置逻辑上更加便捷、高效，也使得语法更为简洁明了。
 
 ## 模块介绍：
-##### Context(上下文运行环境)：
+### Context(上下文运行环境)：
 这是Koa运行的上下文环境，也是Koa Application类其自身, 主要功能包含有：
 - 应用的创建
 	Koa Constructor构造函数完成了Koa类的一些基本属性例如：proxy、subdomainOffset、maxIpsCount的初始化，  
@@ -85,24 +85,33 @@ Koa是一个轻量级的、更富有表现力的、可扩展性的高效便捷�
     return fnMiddleware(ctx).then(handleResponse).catch(onerror);
   }
 ```
-callback负责对API请求的处理，每当有请求接收到时，callback将会基于Req和Res创建一个新的上下文作用域，  
-并将中间件通过middleware进行组装，传递给handleRequest进行处理。  
-handleRequest被调用开始依序调用相应中间件，开始对API请求作出相应处理，同时监听此过程中发生的错误，最后对HTTP返回的内容数据进行统一的格式化处理。  
-最终完成了一个API请求，到中间件处理，最后返回的过程。
+callback负责对API请求的处理，每当有请求接收到时，  
+callback将会基于Req和Res创建一个新的上下文作用域，并将中间件通过middleware进行组装，传递给handleRequest进行处理。  
+
+
+handleRequest被调用开始依序调用相应中间件，开始对API请求作出相应处理，  
+同时监听此过程中发生的错误，最后对HTTP返回的内容数据进行统一的格式化处理。最终完成了一个API请求，到中间件处理，最后返回的过程。
 	
 - 中间件的装载  
 	顾名思义，此模块是为了完成对于Koa中间件的装载而存在的，  
 	在Koa中中间件是一个依序加载的队列，也因此装载的过程也十分简单，将需要执行的中间件推入队列中即可`this.middleware.push(fn)`。
 
-##### Request(HTTP 请求封装)：
+### Request(HTTP 请求封装)：
 Request类是Koa基于HTTP Req上进行的二次封装，主要包含以下功能：
 - header 请求头的获取与设置
 - 请求url、origin、href、method以及host等HTTP信息的访问
 - IP、secure、subdomains、accept等辅助支持类相关信息的访问
 
-##### Response(HTTP 返回封装)：
+### Response(HTTP 返回封装)：
+Response类与Request类似，除却一些基本信息的获取，还增添了一些额外的功能：
+- HTTP状态码以及Response Body的设置
+- 路由的重定向redirect
+- Content-Type、Last-Modified、ETag等HTTP响应头字段设置
+- Socket流是否可写入检测等功能...
 
-##### 中间件(Koa-Router)：
+### 中间件(Koa-Router)：
+在Koa中中间件便是核心所在，这是Koa实际上处理HTTP请求并返回相应结果的地方，  
+这里我们将着重描述一下Koa-Router是如何运行的？
 
 ## 总结：
 Koa是个高效、轻量级的Node开发框架，Koa的源码并不复杂，却刚好能够满足HTTP应用开发中的基本功能。  
