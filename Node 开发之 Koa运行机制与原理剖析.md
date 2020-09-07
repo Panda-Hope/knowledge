@@ -43,11 +43,11 @@ Koa是一个轻量级的、更富有表现力的、可扩展性的高效便捷�
 
 ## 模块介绍：
 ### Context(上下文运行环境)：
-	这是Koa运行的上下文环境，也是Koa Application类其自身, 主要功能包含有：
-	- 应用的创建
-		Koa Constructor构造函数完成了Koa类的一些基本属性例如：proxy、subdomainOffset、maxIpsCount的初始化，  
-		以及通过delegate来完成Context、Request以及Response类的预装载，以减轻后续每次HTTP请求所需创建的资源。
-	- HTTP请求的监听与处理  
+这是Koa运行的上下文环境，也是Koa Application类其自身, 主要功能包含有：
+- 应用的创建
+	Koa Constructor构造函数完成了Koa类的一些基本属性例如：proxy、subdomainOffset、maxIpsCount的初始化，  
+	以及通过delegate来完成Context、Request以及Response类的预装载，以减轻后续每次HTTP请求所需创建的资源。
+- HTTP请求的监听与处理  
 		在Koa，HTTP请求的处理由callBack以及handleRequest来处理：
 	```$xslt
 	/**
