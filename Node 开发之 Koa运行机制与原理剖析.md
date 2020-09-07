@@ -25,7 +25,8 @@ Koa是一个轻量级的、更富有表现力的、可扩展性的高效便捷�
 
 ##### Koa包含那几个模块？
 - Context(上下文运行环境)：  
-	这是Koa运行的上下文环境，也是Koa Application类其自身，主要包含了应用的初始化、服务器的启动、HTTP请求的处理、中间件的挂载这几个模块。
+	这是Koa运行的上下文环境，也是Koa Application类其自身，  
+	主要包含了应用的初始化、服务器的启动、HTTP请求的处理、中间件的挂载这几个模块。
 - Request(HTTP 请求封装)：  
 	Request对象基于node原生req封装了一系列便利属性和方法，供处理请求时调用
 - Response(HTTP 返回封装)：  
@@ -90,7 +91,8 @@ callback将会基于Req和Res创建一个新的上下文作用域，并将中间
 
 
 handleRequest被调用开始依序调用相应中间件，开始对API请求作出相应处理，  
-同时监听此过程中发生的错误，最后对HTTP返回的内容数据进行统一的格式化处理。最终完成了一个API请求，到中间件处理，最后返回的过程。
+同时监听此过程中发生的错误，最后对HTTP返回的内容数据进行统一的格式化处理。  
+最终完成了一个API请求，到中间件处理，最后返回的过程。
 	
 - 中间件的装载  
 	顾名思义，此模块是为了完成对于Koa中间件的装载而存在的，  
@@ -110,9 +112,14 @@ Response类与Request类似，除却一些基本信息的获取，还增添了�
 - Socket流是否可写入检测等功能...
 
 ### 中间件(Koa-Router)：
-在Koa中中间件便是核心所在，这是Koa实际上处理HTTP请求并返回相应结果的地方，  
+在Koa中中间件便是核心所在，这是Koa实际上处理HTTP请求并返回相应结果的地方。  
 这里我们将着重描述一下Koa-Router是如何运行的？
+
+##### 首先我们看下Koa-Router的一些基本数据结构：
+<img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/image.png" />
+
 
 ## 总结：
 Koa是个高效、轻量级的Node开发框架，Koa的源码并不复杂，却刚好能够满足HTTP应用开发中的基本功能。  
-基于async/await（generator）的中间件洋葱模型使得Koa不仅能够摆脱传统Node开发中回调地狱的问题，也使得在此之上的扩展更为便捷，这也为基于Koa开发的Egg.js框架提供了足够的基本功能。
+基于async/await（generator）的中间件洋葱模型使得Koa不仅能够摆脱传统Node开发中回调地狱的问题，  
+也使得在此之上的扩展更为便捷，这也为基于Koa开发的Egg.js框架提供了足够的基本功能。
