@@ -118,7 +118,9 @@ Response类与Request类似，除却一些基本信息的获取，还增添了�
 ##### 首先我们看下Koa-Router的一些基本结构：
 <img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/image.png" />
 与Koa的中间件相同，Koa-Router的路由也同样是一个依次调用的队列，  
+
 每当我们注册一个路由时，Koa-Router便会注册一个新的Route对象并将其推入Stack队列中，  
+
 而每一层Route中会存在一个对应的Layer，Layer负责对路由规则进行解析与匹配(遵循path-to-regexp规则)，并执行对应路由上的函数操作。
 
 
