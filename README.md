@@ -1,5 +1,8 @@
 # 知识库
 
+### [从 Vue3 源码来看响应式原理](https://github.com/Panda-Hope/knowledge/blob/master/%E4%BB%8E%20Vue3%20%E6%BA%90%E7%A0%81%E6%9D%A5%E7%9C%8B%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.md)
+日期：2021.5.10
+
 ### [如何构造一个简单的正则表达式解析引擎？](https://github.com/Panda-Hope/knowledge/blob/master/%E5%A6%82%E4%BD%95%E6%9E%84%E9%80%A0%E4%B8%80%E4%B8%AA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9F.md)
 日期：2021.1.29
 
