@@ -26,3 +26,5 @@
 
 ### [调查问卷系统架构设计方案](https://github.com/Panda-Hope/knowledge/blob/master/%E8%B0%83%E6%9F%A5%E9%97%AE%E5%8D%B7%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88.md)
 日期：2020.5.16
+
+### [Vue.js 运行机制流程图](https://github.com/Panda-Hope/flow-graphic)
