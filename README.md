@@ -1,7 +1,7 @@
 # 知识库
 
 ### [浏览器内部机制--多进程架构](https://github.com/Panda-Hope/knowledge/blob/master/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6--%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%9E%B6%E6%9E%84.md)
-日期：2021.5.10
+日期：2021.5.1
 
 ### [从 Vue3 源码来看响应式原理](https://github.com/Panda-Hope/knowledge/blob/master/%E4%BB%8E%20Vue3%20%E6%BA%90%E7%A0%81%E6%9D%A5%E7%9C%8B%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.md)
 日期：2021.4.10
