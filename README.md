@@ -1,5 +1,11 @@
 # 知识库
 
+### [浏览器内部机制--多进程架构](https://github.com/Panda-Hope/knowledge/blob/master/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6--%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%9E%B6%E6%9E%84.md)
+日期：2021.5.1
+
+### [从 Vue3 源码来看响应式原理](https://github.com/Panda-Hope/knowledge/blob/master/%E4%BB%8E%20Vue3%20%E6%BA%90%E7%A0%81%E6%9D%A5%E7%9C%8B%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.md)
+日期：2021.4.10
+
 ### [如何构造一个简单的正则表达式解析引擎？](https://github.com/Panda-Hope/knowledge/blob/master/%E5%A6%82%E4%BD%95%E6%9E%84%E9%80%A0%E4%B8%80%E4%B8%AA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9F.md)
 日期：2021.1.29
 
@@ -20,3 +26,6 @@
 
 ### [调查问卷系统架构设计方案](https://github.com/Panda-Hope/knowledge/blob/master/%E8%B0%83%E6%9F%A5%E9%97%AE%E5%8D%B7%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88.md)
 日期：2020.5.16
+
+### [Vue.js 运行机制流程图](https://github.com/Panda-Hope/flow-graphic)
+日期：2018.9.10
