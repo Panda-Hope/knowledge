@@ -27,13 +27,25 @@
 ### [调查问卷系统架构设计方案](https://github.com/Panda-Hope/knowledge/blob/master/%E8%B0%83%E6%9F%A5%E9%97%AE%E5%8D%B7%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88.md)
 日期：2020.5.16
 
-### [web视频播放研究系列]
+### web视频播放研究系列
 最近公司有一些视频播放的需求，研究了一个月的视频播放器，写点文章分享一些
+
+
 [WEB 视频播放（1）视频播放器.md](https://github.com/Panda-Hope/knowledge/blob/master/WEB%20%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%EF%BC%881%EF%BC%89%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8.md)
+
+
 [WEB 视频开发（2）Media.md](https://github.com/Panda-Hope/knowledge/blob/master/WEB%20%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89Media.md)
+
+
 [WEB 视频开发（3）HLS 与 DASH 协议](https://github.com/Panda-Hope/knowledge/blob/master/WEB%20%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89HLS%20%E4%B8%8E%20DASH%20%E5%8D%8F%E8%AE%AE.md)
+
+
 [WEB 视频开发（4）视频安全与视频广告](https://github.com/Panda-Hope/knowledge/blob/master/WEB%20%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%EF%BC%884%EF%BC%89%E8%A7%86%E9%A2%91%E5%AE%89%E5%85%A8%E4%B8%8E%E8%A7%86%E9%A2%91%E5%B9%BF%E5%91%8A%20.md)
+
+
 [WEB 视频开发（5）高性能的弹幕](https://github.com/Panda-Hope/knowledge/blob/master/WEB%20%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%EF%BC%885%EF%BC%89%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%BC%B9%E5%B9%95%20.md)
+
+
 日期：2019.8.27
 
 ### [Vue.js 运行机制流程图](https://github.com/Panda-Hope/flow-graphic)
