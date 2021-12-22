@@ -48,5 +48,8 @@
 
 日期：2019.8.27
 
+### [webpack 多入口优化](https://github.com/Panda-Hope/knowledge/blob/master/webpack%20%E5%A4%9A%E5%85%A5%E5%8F%A3%E4%BC%98%E5%8C%96.md)
+日期：2019.12
+
 ### [Vue.js 运行机制流程图](https://github.com/Panda-Hope/flow-graphic)
 日期：2018.9.10
