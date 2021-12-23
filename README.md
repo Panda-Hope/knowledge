@@ -48,6 +48,9 @@
 
 日期：2019.8.27
 
+### [React 异步组件原理分析](https://github.com/Panda-Hope/knowledge/blob/master/React%20%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%20.md)
+日期：2019.6.12
+
 ### [webpack 多入口优化](https://github.com/Panda-Hope/knowledge/blob/master/webpack%20%E5%A4%9A%E5%85%A5%E5%8F%A3%E4%BC%98%E5%8C%96.md)
 日期：2019.1.2
 
