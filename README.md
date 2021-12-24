@@ -53,3 +53,6 @@
 
 ### [Vue.js 运行机制流程图](https://github.com/Panda-Hope/flow-graphic)
 日期：2018.9.10
+
+### [Vuex学习总结]()
+日期：2018.6.10
