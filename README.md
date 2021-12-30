@@ -1,5 +1,8 @@
 # 知识库
 
+### [如何去做好前端技术管理](https://github.com/Panda-Hope/knowledge/blob/master/%E5%A6%82%E4%BD%95%E5%8E%BB%E5%81%9A%E5%A5%BD%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86%E5%B7%A5%E4%BD%9C)
+日期：2021.12.30
+
 ### [浏览器内部机制--多进程架构](https://github.com/Panda-Hope/knowledge/blob/master/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6--%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%9E%B6%E6%9E%84.md)
 日期：2021.5.1
 
