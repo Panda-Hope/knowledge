@@ -1,5 +1,5 @@
 ## 开篇介绍
-本篇文章是自己对于Vue3源码学习解读系列的第一篇文章。导读篇，本篇主要介绍Vue3源码各个模块的作用，以此作为后续系列文章的开头。由于此系列文章是基于自身对于Vue源码理解而写，若有误错之处，还望请指正包涵。
+本篇文章是自己对于Vue3源码学习解读系列的第一篇文章 __【导读篇】__，本篇主要介绍Vue3源码各个模块的作用，以此作为后续系列文章的开头。由于此系列文章是基于自身对于Vue源码理解而写，若有误错之处，还望请指正包涵。
 
 ## 入口
 Vue3.0采用模块化来设计整个源码的目录结构，packages目录下包含了Vue全部的功能模块。  
@@ -157,8 +157,25 @@ import { extend } from '@vue/shared'
 
 ### Runtime-Core
 ```typescript
+export { baseCompile } from './compile'
 
+// Also expose lower level APIs & types
+export {
+  CompilerOptions,
+  ParserOptions,
+  TransformOptions,
+  CodegenOptions,
+  HoistTransform,
+  BindingMetadata,
+  BindingTypes
+} from './options'
+export { baseParse, TextModes } from './parse'
 ```
+对于 __Runtime-Core__ 模块而言，此模块负责整个 __Vue.js__ 的核心编译过程，在处理，编译主要分为三个步骤：解析、AST语法树生成、打包成Render函数三个步骤。
+
+1. 在解析阶段：这里执行的是 __Vue__ 自身的文法定义，和对于语法表达式的匹配，从而完成对于整个HTML模板的解析。
+2. AST语法树生成阶段：当在前一阶段完成了对于文法的匹配之后，这里开始执行语法的制导翻译，生成VNode节点继而完成AST抽象语法树的生成。
+3. 最后是Render函数的生成，在这里 __Vue__ 通过diff算法来对生成好的AST语法树进行补丁处理，从而提升整个模板的渲染性能，并最终进行组合打包生成最终的Render函数。
 
 ## Shared
 __Shared__ 模块是辅助函数模块，这里没有API功能。
