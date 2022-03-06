@@ -176,8 +176,10 @@ interface WatchOptions extends WatchEffectOptions {
 与 __Vue.js 2.0__ 相比 __Vue.js 3.0__ 新增了`flush`属性与`onTrack`、`onTrigger`两个钩子函数，`flush`的三个属性 `'pre' | 'post' | 'sync'`分别对应`Watch`钩子函数在组件刷新前、中、后三个不同的时期运行，而`onTrack`与`onTrigger`则分别是数据收集与刷新时所要触发的钩子函数。
 
 ## 总结
-得益于 __Vue.js 3.0__ 在 __Componsition Api__ 与 __Setup__ 上所带来的代码语法书写上的提升，__Vue__ 引入了全新的声明式函数 __Ref__ 以及 __Reactive__ 来满足新的语法需求。同时增加了 __shallowRef__ 与 __toRefs__ 之类的变体函数来丰富功能的多样式，  
+得益于 __Vue.js 3.0__ 在 __Componsition Api__ 与 __Setup__ 上所带来的代码语法书写上的提升，__Vue__ 引入了全新的声明式函数 __Ref__ 以及 __Reactive__ 来满足新的语法需求。同时增加了 __shallowRef__ 与 __toRefs__ 之类的变体函数来丰富功能的多样式。
+
 在使用了新的 __ActiveEffect__ 来作为观察器替代了以往的 __Watcher__ 来作为数据监听之后，__Vue__ 新增了 __EffectScope__ 作用域来更进一步提升使用与性能。  
+
 本章我们主要介绍了 __Vue.js 3.0__ 的 __Reactive__ 模块的功能以及是如何去实现数据的双向绑定的，下一章我们将详情介绍 __Vue.js__ 应用是如何去运行，以及组件是如何去更新的。
 
 
