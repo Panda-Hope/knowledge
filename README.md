@@ -1,5 +1,8 @@
 # 知识库
 
+### [【Vue3源码解析三】Vue.js的运行机制与生命周期](https://github.com/Panda-Hope/knowledge/blob/master/%E3%80%90Vue3%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B8%89%E3%80%91Vue.js%E7%9A%84%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md)
+日期：2022.3.13
+
 ### [【Vue3源码解析二】Reactivity响应式数据构建之路](https://github.com/Panda-Hope/knowledge/blob/master/%E3%80%90Vue3%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%BA%8C%E3%80%91Reactivity%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E6%9E%84%E5%BB%BA%E4%B9%8B%E8%B7%AF.md)
 日期：2022.3.5
 
