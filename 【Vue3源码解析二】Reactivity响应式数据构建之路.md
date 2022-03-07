@@ -180,7 +180,7 @@ interface WatchOptions extends WatchEffectOptions {
 
 在使用了新的 __ActiveEffect__ 来作为观察器替代了以往的 __Watcher__ 来作为数据监听之后，__Vue__ 新增了 __EffectScope__ 作用域来更进一步提升使用与性能。  
 
-本章我们主要介绍了 __Vue.js 3.0__ 的 __Reactive__ 模块的功能以及是如何去实现数据的双向绑定的，下一章我们将详情介绍 __Vue.js__ 应用是如何去运行，以及组件是如何去更新的。
+本章我们主要介绍了 __Vue.js 3.0__ 的 __Reactive__ 模块的功能以及是如何去实现数据的双向绑定的，下一章我们将详细介绍 __Vue.js__ 应用是如何去运行，以及组件是如何去更新的。
 
 
 
