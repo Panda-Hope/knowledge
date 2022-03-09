@@ -8,4 +8,12 @@
 2. 模板编译阶段
 3. 运行阶段
 4. 卸载阶段
+
+本篇文章，我们将去讲述 __Vue.js__ 在应用构建阶段与运行阶段的一些操作与细节，以期为读者
+
 <image src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/lifecycle.16e4c08e.png" align="center" width="80%" />
+
+
+
+## 总结
+下一篇，我们将开始介绍 __Vue__ 的 `Compile`编译器，来讲述 __Vue__ 是如何去完成模板编译的。
