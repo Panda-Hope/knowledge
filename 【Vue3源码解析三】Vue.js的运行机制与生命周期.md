@@ -66,7 +66,9 @@ const app: App = {
   provide: (key, value) => App
 }
 ```
-`createApp`函数的第二步，
+`createApp`函数的第二步，主要是导出了`mount`函数，在这里 __Vue__ 首先为组件构造了 `vnode`，这是整个`Virtual DOM`构建的的第一步：“创建`vnode`节点”，之后我们开始执行`render函数`正式开始我们的应用构建。
+
+### render
 
 
 ## Vue.js是如何运行的？
