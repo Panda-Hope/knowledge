@@ -29,6 +29,10 @@ __Vue__ 在`watchEffect api`中提供了三种不同的函数形式：`watchEffe
 那么这里我们首先提出一个问题为什么 __Vue__ 需要三种不同状态的`Scheduler`，而不是一种呢？我们先卖个关子，将答案放在后面揭晓。
 
 ## 如何开启一个新的任务队列?
+
+### 任务堆栈
+__Vue__ 通过`queueJob`开启一个新的`SchedulerJob`，这里首先会对任务进行去重校验，防止重复执行，校验完成之后将新的任务推入当前任务栈中，并开始执行。
+
 ```typescript
 export function queueJob(job: SchedulerJob) {
   if (
@@ -40,24 +44,44 @@ export function queueJob(job: SchedulerJob) {
     job !== currentPreFlushParentJob
   ) {
     if (job.id == null) {
-      queue.push(job)
+      queue.push(job) // 将新任务推入任务栈
     } else {
-      queue.splice(findInsertionIndex(job.id), 0, job)
+      queue.splice(findInsertionIndex(job.id), 0, job) // 重新排列重复任务
     }
-    queueFlush()
+    queueFlush() // 执行下一个刷新任务
+  }
+}
+```
+
+### 开始执行
+
+这里首先`isFlushPending`将会被设置为`true`，意味着任务即将开始执行。之后flushJobs将会被推入下一个微任务队列中，开始正式执行任务队列。
+
+```typescript
+function queueFlush() {
+  if (!isFlushing && !isFlushPending) {
+    isFlushPending = true // 开始等待执行
+    currentFlushPromise = resolvedPromise.then(flushJobs) // 在下一个微任务中执行SchedulerJob
   }
 }
 ```
 
 ## 为什么要使用resolvedPromise？
 
+在这里有一个非常重要的细节，__Vue__ 使用了`Promise`来开启一个新的`SchedulerJob`任务队列执行，而不是直接开始执行
+
+```typescript
+const resolvedPromise: Promise<any> = Promise.resolve()
+```
+
+
 ## 开始执行flushJobs
 
-### 执行pre前置任务
+## 执行pre前置任务
 
-### 执行async同步任务
+## 执行async同步任务
 
-### 执行post后置任务
+## 执行post后置任务
 
 
 
@@ -69,5 +93,12 @@ export function queueJob(job: SchedulerJob) {
 理解`Scheduler`模块的核心在于理解为什么`Scheduler`具有`pre`、`sync`、`post`三种模式，__Vue__ 将每一个`instance.update()`组件刷新推入下一个`micro task`微任务，
 
 由于浏览器每执行一个宏任务之后都会立刻执行下一个微任务， __Vue__ 巧妙的利用了这一规则以使得的组件刷新与任务执行堆栈之间不会冲突。
+
+## 文献参考
+[Microtasks](https://javascript.info/microtask-queue)  
+
+[Event loop: microtasks and macrotasks](https://javascript.info/event-loop)  
+
+[Vue3 task scheduler source code analysis](https://programs.wiki/wiki/vue3-task-scheduler-source-code-analysis.html)
 
 
