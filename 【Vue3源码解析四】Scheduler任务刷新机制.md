@@ -68,13 +68,21 @@ function queueFlush() {
 
 ## 为什么要使用resolvedPromise？
 
-在这里有一个非常重要的细节，__Vue__ 使用了`Promise`来开启一个新的`SchedulerJob`任务队列执行，而并不是直接开始执行，为了了解这个原因，我们首先介绍一些别的东西。
+在这里有一个非常重要的细节，__Vue__ 使用了`Promise`来开启一个新的`SchedulerJob`任务队列执行，而并不是直接开始执行，为了了解这个原因，我们首先介绍一些别的东西：“js的事件轮询机制”
 
 ```typescript
 const resolvedPromise: Promise<any> = Promise.resolve()
 ```
 
-### js
+### js的事件轮询机制
+
+<img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/asdasdas11251251.png" width="400" />
+
+对于浏览器而言js的运行是单线程的，`script`、`html render`、`event`这类的任务它们属于其中的`macro task`宏任务，而`promise`这样的则是属于`micro task`微任务。  
+
+微任务的执行顺序优先于宏任务，每一个宏任务之后都会紧跟一个微任务的执行，微任务的存在确保了浏览器的状态在其执行前后的一致性，因为微任务的执行会优先于`HTML Render`这样的宏任务。  
+
+
 
 
 ## 开始执行flushJobs
