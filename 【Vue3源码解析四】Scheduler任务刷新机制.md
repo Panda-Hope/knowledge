@@ -96,14 +96,21 @@ const resolvedPromise: Promise<any> = Promise.resolve()
 
 
 
-## nextTick的本质
+## nextTick函数的本质
+前面我们介绍了 __Vue__ 的`SchedulerJob`任务队列与微任务、宏任务之间的关系，由于 __Vue__ 的组件刷新会触发`HTML render`(HTML 重绘)，  
+
+而这个操作是一个宏任务，我们知道微任务的执行将会紧跟在宏任务之后，因此对于`nextTick`而言其本质仅仅只是创建一个的`promise.then()`，  
+
+将回调函数推入下一个微任务队列中，便可以保证此时函数的执行会在组件刷新完成之后。
 
 ## 总结
 本章作为前一章 __Vue.js的运行机制与生命周期__ 的补充文章，详细的介绍了`Scheduler`模块是如何去运行的。  
 
-理解`Scheduler`模块的核心在于理解为什么`Scheduler`具有`pre`、`sync`、`post`三种模式，__Vue__ 将每一个`instance.update()`组件刷新推入下一个`micro task`微任务，
+理解`Scheduler`模块的核心在于理解为什么`Scheduler`具有`pre`、`sync`、`post`三种模式以及`Scheduler`与微任务、宏任务之间的关系。
 
-由于浏览器每执行一个宏任务之后都会立刻执行下一个微任务， __Vue__ 巧妙的利用了这一规则以使得的组件刷新与任务执行堆栈之间不会冲突。
+__Vue__ 将每一个`instance.update()`组件刷新推入下一个`micro task`微任务，由于浏览器每执行一个宏任务之后都会立刻执行下一个微任务。
+
+__Vue__ 巧妙的利用了这一规则以使得的组件刷新与任务执行堆栈之间不会冲突。
 
 ## 文献参考
 [Microtasks](https://javascript.info/microtask-queue)  
