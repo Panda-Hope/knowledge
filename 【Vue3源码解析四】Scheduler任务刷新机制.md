@@ -22,11 +22,32 @@ __Vue__ 拥有三种不同的`Scheduler`任务队列类型，它们分别是：
 
 对于每一个任务队列而言，它都存在两种状态`waiting`与`flushing`即等待执行与执行中。每当一个新的`SchedulerJob`开始，__Vue__ 将会创建一个新的`micro task`微任务来执行这个`SchedulerJob`。  
 
+顾名思义，`preFlushCbs`会在`SchedulerJob`也就是组件刷新之前执行，而`flushCbs`则是负责执行组件刷新，最后`postFlushCbs`会在组件刷新完成之后执行。  
 
+__Vue__ 在`watchEffect api`中提供了三种不同的函数形式：`watchEffect`、`watchPostEffect`、`watchSyncEffect`也正是在此基础之上构建而来的。
 
-那么这里我们首先提出一个问题为什么 __Vue__ 需要三种不同状态的`Scheduler`，而不是一种呢？我们先卖个关子，我们将答案放在后面揭晓。
+那么这里我们首先提出一个问题为什么 __Vue__ 需要三种不同状态的`Scheduler`，而不是一种呢？我们先卖个关子，将答案放在后面揭晓。
 
 ## 如何开启一个新的任务队列?
+```typescript
+export function queueJob(job: SchedulerJob) {
+  if (
+    (!queue.length ||
+      !queue.includes(
+        job,
+        isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex
+      )) &&
+    job !== currentPreFlushParentJob
+  ) {
+    if (job.id == null) {
+      queue.push(job)
+    } else {
+      queue.splice(findInsertionIndex(job.id), 0, job)
+    }
+    queueFlush()
+  }
+}
+```
 
 ## 为什么要使用resolvedPromise？
 
