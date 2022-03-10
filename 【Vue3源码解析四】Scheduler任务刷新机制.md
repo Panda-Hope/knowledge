@@ -3,7 +3,7 @@
 
 虽然在源码中`Scheduler`只有不过几百行代码，但它却控制着整个 __Vue.js__ 应用的运转核心，接下来让我们来详细谈谈 `Scheduler`的作用。  
 
-注意`Scheduler`仅仅是负责控制`task`何时更新，它并不执行的组件实际更新。
+注意`Scheduler`仅仅是负责控制`task`何时更新，它并不执行任何实际的操作。
 
 ## 什么是Scheduler？
 如果将整个 __Vue.js__ 应用比喻为一座工厂，那么`Scheduler`则是这座工厂的调度室，它负责整个 __Vue.js__ 应用的任务队列的管理与运行，  
@@ -12,4 +12,28 @@
 <img align="center" width="500" src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/%E6%99%BA%E8%83%BD%E8%B0%83%E5%BA%A6%E5%B9%B3%E5%8F%B0%E7%B3%BB%E7%BB%9F.png" />
 
 ## Scheduler的三种类型
+Scheduler
+那么这里我们首先提出一个问题为什么 __Vue__ 需要三种不同状态的`Scheduler`，而不是一种呢？，这里我们先卖个关子，我们将答案放在后面揭晓。
+
+## 如何开启一个新的任务队列?
+
+## 为什么要使用resolvedPromise？
+
+## 开始执行flushJobs
+
+### 执行pre前置任务
+
+### 执行async同步任务
+
+### 执行post后置任务
+
+
+
+## nextTick的本质
+
+## 总结
+本章作为前一章 __Vue.js的运行机制与生命周期__ 的补充文章，详细的介绍了`Scheduler`模块是如何去运行的。  
+理解`Scheduler`模块的核心在于理解为什么`Scheduler`具有`pre`、`sync`、`post`三种模式，__Vue__ 将每一个`instance.update()`组件刷新推入下一个`micro task`微任务，
+由于浏览器每执行一个宏任务之后都会立刻执行下一个微任务， __Vue__ 巧妙的利用了这一规则以使得的组件刷新与任务执行堆栈之间不会冲突。
+
 
