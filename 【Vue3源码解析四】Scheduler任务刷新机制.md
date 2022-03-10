@@ -68,11 +68,13 @@ function queueFlush() {
 
 ## 为什么要使用resolvedPromise？
 
-在这里有一个非常重要的细节，__Vue__ 使用了`Promise`来开启一个新的`SchedulerJob`任务队列执行，而不是直接开始执行
+在这里有一个非常重要的细节，__Vue__ 使用了`Promise`来开启一个新的`SchedulerJob`任务队列执行，而并不是直接开始执行，为了了解这个原因，我们首先介绍一些别的东西。
 
 ```typescript
 const resolvedPromise: Promise<any> = Promise.resolve()
 ```
+
+### js
 
 
 ## 开始执行flushJobs
