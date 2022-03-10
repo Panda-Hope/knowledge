@@ -82,7 +82,8 @@ const resolvedPromise: Promise<any> = Promise.resolve()
 
 微任务的执行顺序优先于宏任务，每一个宏任务之后都会紧跟一个微任务的执行，微任务的存在确保了浏览器的状态在其执行前后的一致性，因为微任务的执行会优先于`HTML Render`这样的宏任务。  
 
-
+而 __Vue__ 正是巧妙的使用了这一规则，将每一个新的`SchedulerJob`通过`Promise`来推入下一个微任务队列，这样便可以使得其在组件刷新之前执行任务队列，同时也确保了`SchedulerJob`
+任务队列之间的执行顺序，避免了不同任务队列之间执行顺序错乱的问题。
 
 
 ## 开始执行flushJobs
