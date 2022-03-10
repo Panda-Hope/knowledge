@@ -70,6 +70,8 @@ const app: App = {
 
 ### render
 
+### scheduler
+
 
 ## Vue.js是如何运行的？
 
