@@ -15,10 +15,10 @@
 
 ## 一步一步构建Vue.js应用
 
-### createApp
+### createApp创建应用
 在 __Vue.js 3.0__ 中 __Vue__ 使用`createApp`函数来替代了原有的构造函数来创建应用。那么让我们首先来看下 __Vue__ 在这里做了那些事情：
 
-#### 创建应用上下文环境
+#### 构建应用上下文环境
 ```typescript
 const context = createAppContext()
 
@@ -72,7 +72,7 @@ const app: App = {
 
 __Vue__ 将原有的 __Vue 2.0__ 的构造函数移动到`applyOptions`函数中，以兼容原有的功能 __API__ ，在这里 __Vue__ 首先会调用 `beforeCreate` 钩子，  
 
-在完成数据响应式处理、函数包装、计算属性以及观察器等参数初始化之后， __Vue__ 完成了
+在完成数据响应式处理、函数包装、计算属性以及观察器等参数初始化之后， __Vue__ 完成了应用组件的创建，开始调用`created`钩子函数，来完成整个应用的初始化操作。
 
 ```typescript
 export function applyOptions(instance: ComponentInternalInstance) {
@@ -100,9 +100,7 @@ export function applyOptions(instance: ComponentInternalInstance) {
 ```
 
 
-### render
-
-### scheduler
+### patch与compile
 
 
 ## Vue.js是如何运行的？
