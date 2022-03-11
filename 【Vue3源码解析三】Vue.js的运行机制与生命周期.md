@@ -68,6 +68,38 @@ const app: App = {
 ```
 `createApp`函数的第二步，主要是导出了`mount`函数，在这里 __Vue__ 首先为组件构造了 `vnode`，这是整个`Virtual DOM`构建的的第一步：“创建`vnode`节点”，之后我们开始执行`render函数`正式开始我们的应用构建。
 
+#### BeforeCreate与Created生命周期
+
+__Vue__ 将原有的 __Vue 2.0__ 的构造函数移动到`applyOptions`函数中，以兼容原有的功能 __API__ ，在这里 __Vue__ 首先会调用 `beforeCreate` 钩子，  
+
+在完成数据响应式处理、函数包装、计算属性以及观察器等参数初始化之后， __Vue__ 完成了
+
+```typescript
+export function applyOptions(instance: ComponentInternalInstance) {
+  // 当options参数被处理之前调用 beforeCreate 钩子
+  callHook(options.beforeCreate, instance, LifecycleHooks.BEFORE_CREATE)
+  
+  // 处理函数封装
+  methodHandler.bind(publicThis)
+  
+  // 响应式数据处理
+  instance.data = reactive(data)
+  
+  // 计算属性转换
+  const c = computed({
+    get,
+    set
+  })
+  
+  // 创建观察器
+  createWatcher(watchOptions[key], ctx, publicThis, key)
+  
+  // 初始化完成，调用created生命周期钩子 
+  callHook(created, instance, LifecycleHooks.CREATED)
+}
+```
+
+
 ### render
 
 ### scheduler
