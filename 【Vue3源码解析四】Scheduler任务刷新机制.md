@@ -201,7 +201,7 @@ try {
 
 ## 执行post后置任务
 
-后置任务
+`post后置任务`主要是主要是处理一些`effect`效果，在这里已经完成了组件的刷新`component.update()`，同时`watch api`如果选择后置模式的话，也会在这里得以执行。
 
 ```typescript
 export function flushPostFlushCbs(seen?: CountMap) {
