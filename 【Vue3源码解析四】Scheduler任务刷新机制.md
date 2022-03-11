@@ -88,12 +88,158 @@ const resolvedPromise: Promise<any> = Promise.resolve()
 
 ## 开始执行flushJobs
 
+`flushJobs`函数将会正式开始执行 __Vue__ 的任务队列，正如前面所提到的，这里`preFlushCbs`、`flushCbs`、`postFlushCbs`将会依序执行，  
+
+值得注意的是，__Vue__ 在这里将会将任务进行重新排序，以确保父级组件的执行顺序优先于子级组件，因为父级组件首先被构造，所以其拥有更高的优先级。
+
+```typescript
+function flushJobs(seen?: CountMap) {
+  isFlushPending = false
+  isFlushing = true
+  if (__DEV__) {
+    seen = seen || new Map()
+  }
+
+  flushPreFlushCbs(seen)
+
+  // 确保父级组件的刷新优先于子级组件
+  queue.sort((a, b) => getId(a) - getId(b))
+
+  const check = __DEV__
+    ? (job: SchedulerJob) => checkRecursiveUpdates(seen!, job)
+    : NOOP
+
+  try {
+    for (flushIndex = 0; flushIndex < queue.length; flushIndex++) {
+      const job = queue[flushIndex]
+      if (job && job.active !== false) {
+        if (__DEV__ && check(job)) {
+          continue
+        }
+        // console.log(`running:`, job.id)
+        callWithErrorHandling(job, null, ErrorCodes.SCHEDULER)
+      }
+    }
+  } finally {
+    flushIndex = 0
+    queue.length = 0
+
+    flushPostFlushCbs(seen)
+
+    isFlushing = false
+    currentFlushPromise = null
+    
+    // 
+    if (
+      queue.length ||
+      pendingPreFlushCbs.length ||
+      pendingPostFlushCbs.length
+    ) {
+      flushJobs(seen)
+    }
+  }
+}
+```
 ## 执行pre前置任务
+
+`pre前置任务`执行于组件刷新之前，它确保了被执行的函数的组件状态的一致性，前面我们所提到过的 __watch api__ 正是属于前置任务的一种，  
+
+前置任务会被遍历递归执行，以确保所有的任务均被执行完毕。
+
+```typescript
+export function flushPreFlushCbs(
+  seen?: CountMap,
+  parentJob: SchedulerJob | null = null
+) {
+  if (pendingPreFlushCbs.length) {
+    currentPreFlushParentJob = parentJob
+    activePreFlushCbs = [...new Set(pendingPreFlushCbs)]
+    pendingPreFlushCbs.length = 0
+    if (__DEV__) {
+      seen = seen || new Map()
+    }
+    for (
+      preFlushIndex = 0;
+      preFlushIndex < activePreFlushCbs.length;
+      preFlushIndex++
+    ) {
+      if (
+        __DEV__ &&
+        checkRecursiveUpdates(seen!, activePreFlushCbs[preFlushIndex])
+      ) {
+        continue
+      }
+      activePreFlushCbs[preFlushIndex]()
+    }
+    activePreFlushCbs = null
+    preFlushIndex = 0
+    currentPreFlushParentJob = null
+    // 递归执行，确保所有前置任务均被执行完毕
+    flushPreFlushCbs(seen, parentJob)
+  }
+}
+```
 
 ## 执行async同步任务
 
+遍历执行任务，在这里便会去执行组件的刷新`component.update()`任务，同时 __Vue__ 会使用`try catch`来包裹整个流程以确保后序的后置任务得以执行。
+
+```typescript
+try {
+    for (flushIndex = 0; flushIndex < queue.length; flushIndex++) {
+      const job = queue[flushIndex]
+      if (job && job.active !== false) {
+        if (__DEV__ && check(job)) {
+          continue
+        }
+        // console.log(`running:`, job.id)
+        callWithErrorHandling(job, null, ErrorCodes.SCHEDULER)
+      }
+    }
+  }
+```
+
 ## 执行post后置任务
 
+后置任务
+
+```typescript
+export function flushPostFlushCbs(seen?: CountMap) {
+  if (pendingPostFlushCbs.length) {
+    const deduped = [...new Set(pendingPostFlushCbs)]
+    pendingPostFlushCbs.length = 0
+
+    // #1947 already has active queue, nested flushPostFlushCbs call
+    if (activePostFlushCbs) {
+      activePostFlushCbs.push(...deduped)
+      return
+    }
+
+    activePostFlushCbs = deduped
+    if (__DEV__) {
+      seen = seen || new Map()
+    }
+
+    activePostFlushCbs.sort((a, b) => getId(a) - getId(b))
+
+    for (
+      postFlushIndex = 0;
+      postFlushIndex < activePostFlushCbs.length;
+      postFlushIndex++
+    ) {
+      if (
+        __DEV__ &&
+        checkRecursiveUpdates(seen!, activePostFlushCbs[postFlushIndex])
+      ) {
+        continue
+      }
+      activePostFlushCbs[postFlushIndex]()
+    }
+    activePostFlushCbs = null
+    postFlushIndex = 0
+  }
+}
+```
 
 
 ## nextTick函数的本质
