@@ -102,8 +102,21 @@ export function applyOptions(instance: ComponentInternalInstance) {
 
 ### patch与compile
 
+在完成了一个 __Vue.js__ 组件应用的构建之后，我们开始进入了编译环节，这里我们同样也需要去介绍 __Vue__ 源码中的两个模块 `pathch`与`compile`，  
+让我们先来看下`patch`是什么？
+
+#### 什么是patch
+
+当 __Vue.js__ 完成了应用的构建之后，我们得到了组件应用的`virtual dom`，众所周知`virtual dom`在`MVVM`框架中是十分重要的一环，  
+
+
+
 
 ## Vue.js是如何运行的？
 
 ## 总结
 下一篇，我们将开始介绍 __Vue__ 的 `Compile`编译器，来讲述 __Vue__ 是如何去完成模板编译的。
+
+## 文献参考
+[Vue3 source code analysis (5): Patch algorithm](https://segmentfault.com/a/1190000040097158/en)  
+[Vue3 framework principle realization (three)-patch](https://www.mo4tech.com/vue3-framework-principle-realization-three-patch.html)
