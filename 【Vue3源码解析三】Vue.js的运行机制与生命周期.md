@@ -100,9 +100,7 @@ export function applyOptions(instance: ComponentInternalInstance) {
 ```
 
 
-### patch与compile
-
-在完成了一个 __Vue.js__ 组件应用的构建之后，我们开始进入了编译环节，这里我们同样也需要去介绍 __Vue__ 源码中的两个模块 `pathch`与`compile`，让我们先来看下`patch`是什么？
+### patch与virtual dom构建
 
 #### 什么是patch?
 
@@ -178,6 +176,12 @@ const patch: PatchFn = (
   }
 }
 ```
+
+#### diff算法
+
+
+### compile模板编译
+
 
 
 
