@@ -13,12 +13,10 @@
 
 <image src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/lifecycle.16e4c08e.png" align="center" width="80%" />
 
-## 一步一步构建Vue.js应用
-
-### createApp创建应用
+## createApp创建应用
 在 __Vue.js 3.0__ 中 __Vue__ 使用`createApp`函数来替代了原有的构造函数来创建应用。那么让我们首先来看下 __Vue__ 在这里做了那些事情：
 
-#### 构建应用上下文环境
+### 构建应用上下文环境
 ```typescript
 const context = createAppContext()
 
@@ -68,7 +66,7 @@ const app: App = {
 ```
 `createApp`函数的第二步，主要是导出了`mount`函数，在这里 __Vue__ 首先为组件构造了 `vnode`，这是整个`Virtual DOM`构建的的第一步：“创建`vnode`节点”，之后我们开始执行`render函数`正式开始我们的应用构建。
 
-#### BeforeCreate与Created生命周期
+### BeforeCreate与Created生命周期
 
 __Vue__ 将原有的 __Vue 2.0__ 的构造函数移动到`applyOptions`函数中，以兼容原有的功能 __API__ ，在这里 __Vue__ 首先会调用 `beforeCreate` 钩子，  
 
@@ -100,9 +98,9 @@ export function applyOptions(instance: ComponentInternalInstance) {
 ```
 
 
-### patch与virtual dom构建
+## patch与virtual dom构建
 
-#### 什么是patch?
+### 什么是patch?
 
 当 __Vue.js__ 完成了应用的构建之后，我们得到了组件应用的`virtual dom`，众所周知`virtual dom`在`MVVM`框架中是十分重要的一环，  
 
@@ -113,7 +111,7 @@ export function applyOptions(instance: ComponentInternalInstance) {
 1. 创建或删除`Vnode`节点
 2. 更新`Vnode`节点
 
-#### patch源码一览
+### patch源码一览
 
 ```typescript
 const patch: PatchFn = (
@@ -196,12 +194,12 @@ switch(patchFlag) {
 }
 ```
 
-#### diff算法
+### diff算法
 
 
 
 
-### compile模板编译
+## compile模板编译
 
 
 
