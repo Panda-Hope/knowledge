@@ -102,13 +102,82 @@ export function applyOptions(instance: ComponentInternalInstance) {
 
 ### patch与compile
 
-在完成了一个 __Vue.js__ 组件应用的构建之后，我们开始进入了编译环节，这里我们同样也需要去介绍 __Vue__ 源码中的两个模块 `pathch`与`compile`，  
-让我们先来看下`patch`是什么？
+在完成了一个 __Vue.js__ 组件应用的构建之后，我们开始进入了编译环节，这里我们同样也需要去介绍 __Vue__ 源码中的两个模块 `pathch`与`compile`，让我们先来看下`patch`是什么？
 
-#### 什么是patch
+#### 什么是patch?
 
 当 __Vue.js__ 完成了应用的构建之后，我们得到了组件应用的`virtual dom`，众所周知`virtual dom`在`MVVM`框架中是十分重要的一环，  
 
+`virtual dom`是应用组件向实际`HTML`节点渲染的中间体，也是`MVVM`框架对于整个模板渲染性能优化的核心，  
+
+而其中`patch`则是负责`virtual dom`的基础节点`Vnode`的创建与更新,`patch`具有如下功能：
+
+1. 创建或删除`Vnode`节点
+2. 更新`Vnode`节点
+
+#### patch源码一览
+
+```typescript
+const patch: PatchFn = (
+  n1,
+  n2,
+  container,
+  anchor = null,
+  parentComponent = null,
+  parentSuspense = null,
+  isSVG = false,
+  slotScopeIds = null,
+  optimized = false
+) => {
+  // patching & 不是相同类型的 VNode，则从节点树中卸载
+  if (n1 && !isSameVNodeType(n1, n2)) {
+    anchor = getNextHostNode(n1)
+    unmount(n1, parentComponent, parentSuspense, true)
+    n1 = null
+  }
+    // PatchFlag 是 BAIL 类型，则跳出优化模式
+  if (n2.patchFlag === PatchFlags.BAIL) {
+    optimized = false
+    n2.dynamicChildren = null
+  }
+
+  const { type, ref, shapeFlag } = n2
+  switch (type) { // 根据 Vnode 类型判断
+    case Text: // 文本类型
+      processText(n1, n2, container, anchor)
+      break
+    case Comment: // 注释类型
+      processCommentNode(n1, n2, container, anchor)
+      break
+    case Static: // 静态节点类型
+      if (n1 == null) {
+        mountStaticNode(n2, container, anchor, isSVG)
+      }
+      break
+    case Fragment: // Fragment 类型
+      processFragment(/* 忽略参数 */)
+      break
+    default:
+      if (shapeFlag & ShapeFlags.ELEMENT) { // 元素类型
+        processElement(
+          n1,
+          n2,
+          container,
+          anchor,
+          parentComponent,
+          parentSuspense,
+          isSVG,
+          slotScopeIds,
+          optimized
+        )
+      } else if (shapeFlag & ShapeFlags.COMPONENT) { // 组件类型
+        processComponent(/* 忽略参数 */)
+      } else if (shapeFlag & ShapeFlags.TELEPORT) { // TELEPORT 类型
+        ;(type as typeof TeleportImpl).process(/* 忽略参数 */)
+      }
+  }
+}
+```
 
 
 
@@ -119,4 +188,5 @@ export function applyOptions(instance: ComponentInternalInstance) {
 
 ## 文献参考
 [Vue3 source code analysis (5): Patch algorithm](https://segmentfault.com/a/1190000040097158/en)  
-[Vue3 framework principle realization (three)-patch](https://www.mo4tech.com/vue3-framework-principle-realization-three-patch.html)
+[Vue3 framework principle realization (three)-patch](https://www.mo4tech.com/vue3-framework-principle-realization-three-patch.html)  
+[graphical-analysis-of-vue3-diff-algorithm.html](https://programmer.ink/think/graphical-analysis-of-vue3-diff-algorithm.html)
