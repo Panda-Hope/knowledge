@@ -1,5 +1,8 @@
 # 知识库
 
+### [【Vue3源码解析四】Scheduler任务刷新机制](https://github.com/Panda-Hope/knowledge/blob/master/%E3%80%90Vue3%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%9B%9B%E3%80%91Scheduler%E4%BB%BB%E5%8A%A1%E5%88%B7%E6%96%B0%E6%9C%BA%E5%88%B6.md)
+日期：2022.3.8
+
 ### [【Vue3源码解析三】Vue.js的运行机制与生命周期](https://github.com/Panda-Hope/knowledge/blob/master/%E3%80%90Vue3%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B8%89%E3%80%91Vue.js%E7%9A%84%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md)
 日期：2022.3.13
 
