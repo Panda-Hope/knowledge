@@ -193,6 +193,7 @@ switch(patchFlag) {
   case TEXT: // 文本类型将会被直接替换
 }
 ```
+当执行完`patch`后 __Vue__ 将会调用`beforeMount`钩子，并开始进行模板编译。
 
 ### diff算法
 
