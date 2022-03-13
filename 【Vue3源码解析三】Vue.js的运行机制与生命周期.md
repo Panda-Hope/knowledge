@@ -44,7 +44,7 @@ function createAppContext(): AppContext {
 ```
 在这里，我们得到了一个 __Vue.js__ 应用的基本骨架，它包含基本的应用、配置、component等属性。
 
-#### 创建应用主体
+### 创建应用主体
 ```typescript
 const app: App = {
   _uid: uid++,
