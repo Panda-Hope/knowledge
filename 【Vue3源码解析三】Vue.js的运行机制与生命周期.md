@@ -185,6 +185,20 @@ const patch: PatchFn = (
 1. 比较元素节点
 2. 更新节点数据数据
 
+对于元素的更新将会分为以下几种具体情况：
+```typescript
+switch(patchFlag) {
+  case FULL_PROPS: // 表示元素需要全面更新，比如dynamic key
+  case CLASS: // 当属于class类型时,patch会进行比较判断并进行进行
+  case STYLE: // 样式类型，样式将会会自动添加到节点
+  case PROPS: // props传参将会被提取成数组，并执行遍历将新旧数据进行对比，然后更新参数
+  case TEXT: // 文本类型将会被直接替换
+}
+```
+
+
+  
+
 
 
 #### diff算法
