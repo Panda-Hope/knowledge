@@ -197,6 +197,12 @@ switch(patchFlag) {
 
 ### diff算法
 
+__Vue__ 的`diff`算法是用来决定`vnode`节点是否需要更新的判断逻辑，这里我们简单阐述一下`diff`算法的实现逻辑。  
+
+首先 __Vue__ 会将`vnode`节点打上`key`标签将节点分为两类：带`key`标签的
+
+
+
 
 
 
