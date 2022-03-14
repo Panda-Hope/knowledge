@@ -1,5 +1,11 @@
 # 知识库
 
+### [【Vue3源码解析六】Compile模板编译器](https://github.com/Panda-Hope/knowledge/blob/master/%E3%80%90Vue3%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%85%AD%E3%80%91Compile%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91%E5%99%A8.md)
+日期：2022.5.12
+
+### [【Vue3源码解析五】Computed计算属性与Watch观察器](https://github.com/Panda-Hope/knowledge/blob/master/%E3%80%90Vue3%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%BA%94%E3%80%91Computed%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%B8%8EWatch%E8%A7%82%E5%AF%9F%E5%99%A8.md)
+日期：2022.3.15
+
 ### [【Vue3源码解析四】Scheduler任务刷新机制](https://github.com/Panda-Hope/knowledge/blob/master/%E3%80%90Vue3%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%9B%9B%E3%80%91Scheduler%E4%BB%BB%E5%8A%A1%E5%88%B7%E6%96%B0%E6%9C%BA%E5%88%B6.md)
 日期：2022.3.8
 
