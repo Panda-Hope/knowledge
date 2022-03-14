@@ -235,8 +235,7 @@ __Vue__ 首先会尽可能的将节点不断的重复前面三种判断，最大
 2. 遍历数组，更新新旧`vnode`数组中相同的节点，同时卸载不再使用的废弃节点
 3. 新旧节点数组中存在可重复使用的交叉节点，将重复的交叉节点进行位移操作，减少操作次数。
 
-<img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/back.b7c62a1.png" />
-
+<img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/bee8583bece95b43364b9730a7e3543b.jpg" />
 
 
 ## compile模板编译
