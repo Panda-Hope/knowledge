@@ -310,11 +310,9 @@ function baseParse(
 export type RenderFunction = () => VNodeChild
 ```
 
-
-
-
-
 ## Vue.js是如何运行的？
+
+
 
 ## 总结
 下一篇，我们将开始介绍 __Vue__ 的 `Compile`编译器，来讲述 __Vue__ 是如何去完成模板编译的。
