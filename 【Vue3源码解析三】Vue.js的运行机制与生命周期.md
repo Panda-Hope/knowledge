@@ -1,6 +1,10 @@
 ## 前言
-前面第二章，我们讲述了 __Reactive__ 响应式数据是如何去实现双向绑定的，但是却没有去叙述`Effect`最终是如何去完成视图更新的，  
-这里我们将结合 __Vue.js__ 的生命周期，从应用构建开始去更加完整的讲述一个 __Vue.js__ 应用是如何完成构建并运行的。
+前面第二章，我们讲述了 __Reactive__ 响应式数据是如何去实现双向绑定的，但是却没有去叙述`Effect`最终是如何去完成视图更新的， 
+
+这里我们将结合 __Vue.js__ 的生命周期，从应用构建开始去更加完整的讲述一个 __Vue.js__ 应用是如何完成构建并运行的。  
+
+本章我们较为详细的介绍了 __Vue.js__ 在运行中所遇到的一些核心模块功能，全文较为冗长，还请慢品o(╯□╰)o。
+
 
 ## Vue.js应用的生命周期
 首先，我们来看下 __Vue__ 官方所给出的生命周期示意图，这里我们将整个生命周期简单的分为四个阶段：
@@ -240,6 +244,8 @@ __Vue__ 首先会尽可能的将节点不断的重复前面三种判断，最大
 
 ## compile模板编译
 
+在正式开始介绍`compile`编译器之前，我们先介绍一下 __Vue__ 的`beforemount`与`mounted`生命周期钩子，之后我们开始阐述`compile`编译器概念及其基本机制。
+
 ### BeforeMount与Mounted生命周期 
 
 对于模板的编译 __Vue__ 实际上在执行`beforemount`生命周期钩子之前就已经完成了，  
@@ -260,6 +266,8 @@ hostInsert(el, container, anchor)
 invokeDirectiveHook(vnode, null, parentComponent, 'mounted')
 ```
 
+### 什么是compile编译器？
+
 
 
 
@@ -272,5 +280,11 @@ invokeDirectiveHook(vnode, null, parentComponent, 'mounted')
 
 ## 文献参考
 [Vue3 source code analysis (5): Patch algorithm](https://segmentfault.com/a/1190000040097158/en)  
+
 [Vue3 framework principle realization (three)-patch](https://www.mo4tech.com/vue3-framework-principle-realization-three-patch.html)  
-[graphical-analysis-of-vue3-diff-algorithm.html](https://programmer.ink/think/graphical-analysis-of-vue3-diff-algorithm.html)
+
+[graphical-analysis-of-vue3-diff-algorithm.html](https://programmer.ink/think/graphical-analysis-of-vue3-diff-algorithm.html)  
+
+[Compiler principle and optimization strategy in vue3](https://copyfuture.com/blogs-details/202201291044027584)  
+
+[Analysis of Vue compiling principle](https://qdmana.com/2022/02/202202020428204975.html)
