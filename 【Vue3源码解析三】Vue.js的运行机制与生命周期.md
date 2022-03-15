@@ -268,6 +268,15 @@ invokeDirectiveHook(vnode, null, parentComponent, 'mounted')
 
 ### 什么是compile编译器？
 
+编译器是一个非常宽泛的概念，从广义上来讲编译器会将某种编程语言写成的源代码（原始语言）转换成另一种编程语言，其主要目的是将人类能够阅读的语法翻译成机器能够阅读的语言。  
+
+在编译原理一书中完整的编译器包括语法、词法定义以及自动机、语法制导翻译、词法解析、语法分析树等模块，而从过程角度来说则分为：  
+
+`词法分析->语法分析->语法分析树构建->语法制导翻译->代码优化->最终代码生成`，这几个步骤。  
+
+无论何种编译器都离不开语法分析，中间件构建，代码生成这三个环境， __Vue.js__ 的编译器亦是如此。
+
+### 
 
 
 
@@ -287,4 +296,6 @@ invokeDirectiveHook(vnode, null, parentComponent, 'mounted')
 
 [Compiler principle and optimization strategy in vue3](https://copyfuture.com/blogs-details/202201291044027584)  
 
-[Analysis of Vue compiling principle](https://qdmana.com/2022/02/202202020428204975.html)
+[Analysis of Vue compiling principle](https://qdmana.com/2022/02/202202020428204975.html)  
+
+[编译原理](https://item.jd.com/10058776.html)
