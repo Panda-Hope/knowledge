@@ -240,6 +240,28 @@ __Vue__ 首先会尽可能的将节点不断的重复前面三种判断，最大
 
 ## compile模板编译
 
+### BeforeMount与Mounted生命周期 
+
+对于模板的编译 __Vue__ 实际上在执行`beforemount`生命周期钩子之前就已经完成了，  
+
+对于`beforemount`与`mounted`钩子而言他们的区别仅仅在于将`node`节点挂载到`container`上面而言。
+
+```typescript
+// 实际开始编译模板处
+Component.render = compile(template, finalCompilerOptions)
+
+// beforeMount生命周期
+invokeDirectiveHook(vnode, null, parentComponent, 'beforeMount')
+
+// 挂载节点
+hostInsert(el, container, anchor) 
+
+// mounted生命周期
+invokeDirectiveHook(vnode, null, parentComponent, 'mounted')
+```
+
+
+
 
 
 
