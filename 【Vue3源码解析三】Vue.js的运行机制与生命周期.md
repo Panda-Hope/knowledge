@@ -330,4 +330,4 @@ export type RenderFunction = () => VNodeChild
 
 [Analysis of Vue compiling principle](https://qdmana.com/2022/02/202202020428204975.html)  
 
-[编译原理](https://item.jd.com/10058776.html)
+[编译原理第二版 [Compilers:Principle,Techniques and Tools]](https://item.jd.com/10058776.html)
