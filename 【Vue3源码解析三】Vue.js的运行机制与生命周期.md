@@ -274,9 +274,31 @@ invokeDirectiveHook(vnode, null, parentComponent, 'mounted')
 
 `词法分析->语法分析->语法分析树构建->语法制导翻译->代码优化->最终代码生成`，这几个步骤。  
 
-无论何种编译器都离不开语法分析，中间件构建，代码生成这三个环境， __Vue.js__ 的编译器亦是如此。
+无论何种编译器都离不开语法分析，中间件构建，代码生成这三个环节， __Vue.js__ 的编译器亦是如此。
 
-### 
+### 语法分析
+
+`compile`的语法分析由`baseParse`函数完成，语法分析主要分为两步：
+1. 解析模板构建AST语法抽象树
+2. 处理style、class、diretive等辅助功能
+
+```typescript
+function baseParse(
+  content: string,
+  options: ParserOptions = {}
+): RootNode {
+  const context = createParserContext(content, options)
+  const start = getCursor(context)
+  return createRoot(
+    parseChildren(context, TextModes.DATA, []),
+    getSelection(context, start)
+  )
+}
+```
+
+### 代码生成
+
+`compile`
 
 
 
