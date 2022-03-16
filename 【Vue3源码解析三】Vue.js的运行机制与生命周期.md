@@ -434,7 +434,14 @@ queuePostRenderEffect(
 
 
 ## 总结
-下一篇，我们将开始介绍 __Vue__ 的 `Compile`编译器，来讲述 __Vue__ 是如何去完成模板编译的。
+
+本章，我们较为详细的介绍了一个完整的 __Vue.js__ 应用从应用主体创建、AST虚拟DOM搭建、模板编译最后到应用运行的过程，  
+
+并介绍了各个模块中的核心部分`patch`、`diff算法`等，同时我们也提到了一些同样重要的辅助模块如：`dep`、`effect`、`scheduler`等，  
+
+以期让读者对于整个 __Vue.js__ 的运行有着更加深刻的体会。本章比较冗长也是整个 __Vue3 源码解析系列__ 中最为重要的环节，
+
+接下来我们将开始详细介绍 __Vue__ 的一些核心的辅助模块，之后我们会开始详细的讲解 __Vue__ 的编译器是如何去实现的。
 
 ## 文献参考
 [Vue3 source code analysis (5): Patch algorithm](https://segmentfault.com/a/1190000040097158/en)  
