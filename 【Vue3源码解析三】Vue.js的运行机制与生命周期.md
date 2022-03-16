@@ -318,7 +318,15 @@ export type RenderFunction = () => VNodeChild
 
 ### 组件是如何去更新的？
 
-我们在前面的 __Reactivity__ 模块时便已经提过，`Dep`是整个 __Vue.js__ 工厂的`搬运工`，它们负责将货物装载到`Effect`这趟列车
+我们在前面的 __Reactivity__ 模块时便已经提过，`Dep`是整个 __Vue.js__ 工厂的`搬运工`，它们负责将货物装载到`Effect`这趟列车，  
+
+然后由`EffectScope`这个列车长通知调度室`Scheduler`来发车，将货物运送到工厂由`SetupRenderEffectFn`来真正执行组件的更新，这个步骤共分为：
+
+1. `Dep`获取依赖的更新，通知`Effect`数据需要更新
+2. `Effect`收集依赖的更新数据情况将之汇总
+3. 由`EffectScope`这个总列车头来判断哪些`Effect`需要装载更新
+4. 调用`Scheduler`将本次组件更新的全部操作推入下一个微任务队列中
+5. 执行`setupRenderEffect`函数完成组件更新，在下一个微任务队列中调用`updated`钩子，通知组件更新完成
 
 
 ### SetupRenderEffectFn组件更新函数
