@@ -314,7 +314,7 @@ export type RenderFunction = () => VNodeChild
 
 在经过了应用的创建与挂载之后，我们得到了完整的可运行的 __Vue.js__ 应用，此时我们便到了本章的最后一个模块，应用是如何运行的？
 
-如果说将`Scheduler`模板比作一个车站的调度室，那么`Effect`模块则是负责拖运货物的列车，而车上拖运的货物之一便是组件的刷新函数`render`。
+如果说将`Scheduler`比作一个车站的调度室，那么`Effect`则是负责拖运货物的列车，而车上拖运的货物之一便是组件的刷新函数`render`。
 
 ### 组件是如何去更新的？
 
@@ -328,14 +328,97 @@ export type RenderFunction = () => VNodeChild
 4. 调用`Scheduler`将本次组件更新的全部操作推入下一个微任务队列中
 5. 执行`setupRenderEffect`函数完成组件更新，在下一个微任务队列中调用`updated`钩子，通知组件更新完成
 
+<img width="500" align="center" src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/%E6%88%AA%E5%B1%8F2022-03-16%20%E4%B8%8B%E5%8D%882.44.47.png" />
 
 ### SetupRenderEffectFn组件更新函数
 
+`SetupRenderEffectFn`函数是实际负责组件更新的地方，
 
+```typescript
+const setupRenderEffect: SetupRenderEffectFn = (
+    instance,
+    initialVNode,
+    container,
+    anchor,
+    parentSuspense,
+    isSVG,
+    optimized
+  ) => {
+  const componentUpdateFn = () => {
+    let { next, bu, u, parent, vnode } = instance
+    let originNext = next
+    let vnodeHook: VNodeHook | null | undefined
+    
+    toggleRecurse(instance, false)
+    
+    if (next) {
+      next.el = vnode.el
+      updateComponentPreRender(instance, next, optimized)
+    } else {
+      next = vnode
+    }
+
+    // 调用before update钩子
+    if (bu) {
+      invokeArrayFns(bu)
+    }
+    
+    // 将新旧 AST语法树进行对比更新
+    patch(
+      prevTree,
+      nextTree,
+      // parent may have changed if it's in a teleport
+      hostParentNode(prevTree.el!)!,
+      // anchor may have changed if it's in a fragment
+      getNextHostNode(prevTree),
+      instance,
+      parentSuspense,
+      isSVG
+    )
+    
+    next.el = nextTree.el
+    
+    if (originNext === null) {
+      // self-triggered update. In case of HOC, update parent component
+      // vnode el. HOC is indicated by parent instance's subTree pointing
+      // to child component's vnode
+      updateHOCHostEl(instance, nextTree.el)
+    }
+    
+    // 在下一个微任务队列中执行updated钩子
+    if (u) {
+      queuePostRenderEffect(u, parentSuspense)
+    }
+    // onVnodeUpdated
+    if ((vnodeHook = next.props && next.props.onVnodeUpdated)) {
+      queuePostRenderEffect(
+        () => invokeVNodeHook(vnodeHook!, parent, next!, vnode),
+        parentSuspense
+      )
+    }
+  }
+  
+  // 创建render effect
+  const effect = (instance.effect = new ReactiveEffect(
+    componentUpdateFn,
+    () => queueJob(instance.update),
+    instance.scope // track it in component's effect scope
+  ))
+  
+  const update = (instance.update = effect.run.bind(effect) as SchedulerJob)
+  update.id = instance.uid
+  
+  // 开始执行更新
+  update()
+}
+```
 
 ### BeforeUpdate与Updated生命周期
 
-<img width="500" align="center" src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/%E6%88%AA%E5%B1%8F2022-03-16%20%E4%B8%8B%E5%8D%882.44.47.png" />
+
+
+```typescript
+```
 
 
 
