@@ -18,7 +18,7 @@
 <image src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/lifecycle.16e4c08e.png" align="center" width="80%" />
 
 ## createApp创建应用
-在 __Vue.js 3.0__ 中 __Vue__ 使用`createApp`函数来替代了原有的构造函数来创建应用。那么让我们首先来看下 __Vue__ 在这里做了那些事情：
+在 __Vue.js 3.0__ 中 __Vue__ 使用`createApp`函数来替代了原有的构造函数来创建应用，那么让我们首先来看下 __Vue__ 在这里做了那些事情：
 
 ### 构建应用上下文环境
 ```typescript
@@ -68,13 +68,17 @@ const app: App = {
   provide: (key, value) => App
 }
 ```
-`createApp`函数的第二步，主要是导出了`mount`函数，在这里 __Vue__ 首先为组件构造了 `vnode`，这是整个`Virtual DOM`构建的的第一步：“创建`vnode`节点”，之后我们开始执行`render函数`正式开始我们的应用构建。
+`createApp`函数的第二步，主要是导出了`mount`函数，在这里 __Vue__ 首先为组件构造了 `vnode`，这是整个`Virtual DOM`构建的的第一步：  
+
+“创建`vnode`节点”，之后我们开始执行`render函数`正式开始我们的应用构建。
 
 ### BeforeCreate与Created生命周期
 
 __Vue__ 将原有的 __Vue 2.0__ 的构造函数移动到`applyOptions`函数中，以兼容原有的功能 __API__ ，在这里 __Vue__ 首先会调用 `beforeCreate` 钩子，  
 
-在完成数据响应式处理、函数包装、计算属性以及观察器等参数初始化之后， __Vue__ 完成了应用组件的创建，开始调用`created`钩子函数，来完成整个应用的初始化操作。
+在完成数据响应式处理、函数包装、计算属性以及观察器等参数初始化之后， __Vue__ 完成了应用组件的创建，  
+
+开始调用`created`钩子函数完成整个应用的初始化操作。
 
 ```typescript
 export function applyOptions(instance: ComponentInternalInstance) {
@@ -214,7 +218,9 @@ __Vue__ 的`diff`算法是用来决定`vnode`节点是否需要更新的判断�
 
 此种情况下的判断最为简单，因为再次之前 __Vue__ 已经将节点树进行树遍历，并依序排列完成，  
 
-因此此时仅需要取得新旧两个节点树的公共长度`commonLength = Math.min(old.length, new.length)`然后将公共节点之外的节点进行删除或者新增即可。
+因此此时仅需要取得新旧两个节点树的公共长度`commonLength = Math.min(old.length, new.length)`，  
+
+然后将公共节点之外的节点进行删除或者新增即可。
 
 <img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/e85b794f1950017098081825790d9b74.jpg" />
 
@@ -432,14 +438,13 @@ queuePostRenderEffect(
 )
 ```
 
-
 ## 总结
 
 本章，我们较为详细的介绍了一个完整的 __Vue.js__ 应用从应用主体创建、AST虚拟DOM搭建、模板编译最后到应用运行的过程，  
 
 并介绍了各个模块中的核心部分`patch`、`diff算法`等，同时我们也提到了一些同样重要的辅助模块如：`dep`、`effect`、`scheduler`等，  
 
-以期让读者对于整个 __Vue.js__ 的运行有着更加深刻的体会。本章比较冗长也是整个 __Vue3 源码解析系列__ 中最为重要的环节，
+以期让读者对于整个 __Vue.js__ 的运行有着更加深刻的体会。本章比较冗长同时也是整个 __Vue3 源码解析系列__ 中最为重要的环节，
 
 接下来我们将开始详细介绍 __Vue__ 的一些核心的辅助模块，之后我们会开始详细的讲解 __Vue__ 的编译器是如何去实现的。
 
