@@ -332,7 +332,9 @@ export type RenderFunction = () => VNodeChild
 
 ### SetupRenderEffectFn组件更新函数
 
-`SetupRenderEffectFn`函数是实际负责组件更新的地方，
+`SetupRenderEffectFn`函数是实际负责组件更新的地方，在这里 __Vue__ 会将新旧节点树进行`diff`对比生成新的节点树，  
+
+并为此次更新创建一个新的`effect`，在绑定作用域之后调用`effect.run`开始执行更新操作，最后在下一个微任务队列中执行`updated`钩子。
 
 ```typescript
 const setupRenderEffect: SetupRenderEffectFn = (
@@ -415,12 +417,20 @@ const setupRenderEffect: SetupRenderEffectFn = (
 
 ### BeforeUpdate与Updated生命周期
 
+`BeforeUpdate`钩子调用于组件刷新之前，值得一提的是`Updated`钩子函数并非直接调用与`patch`更新之后，而是执行在下一个微任务队列，  
 
+这是因为`patch`函数执行完成后，实际DOM的更新是在下一个宏任务中执行，因此需要在下一个微任务队列中执行 `Updated`钩子才能确保此时组件已完全实现更新。
 
 ```typescript
+// beforeUpdate钩子
+instance.emit('hook:beforeUpdate')
+
+// updated钩子
+queuePostRenderEffect(
+  () => instance.emit('hook:updated'),
+  parentSuspense
+)
 ```
-
-
 
 
 ## 总结
