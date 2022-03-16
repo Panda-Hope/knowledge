@@ -312,6 +312,24 @@ export type RenderFunction = () => VNodeChild
 
 ## Vue.js是如何运行的？
 
+在经过了应用的创建与挂载之后，我们得到了完整的可运行的 __Vue.js__ 应用，此时我们便到了本章的最后一个模块，应用是如何运行的？
+
+如果说将`Scheduler`模板比作一个车站的调度室，那么`Effect`模块则是负责拖运货物的列车，而车上拖运的货物之一便是组件的刷新函数`render`。
+
+### 组件是如何去更新的？
+
+我们在前面的 __Reactivity__ 模块时便已经提过，`Dep`是整个 __Vue.js__ 工厂的`搬运工`，它们负责将货物装载到`Effect`这趟列车
+
+
+### SetupRenderEffectFn组件更新函数
+
+
+
+### BeforeUpdate与Updated生命周期
+
+<img width="500" align="center" src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/%E6%88%AA%E5%B1%8F2022-03-16%20%E4%B8%8B%E5%8D%882.44.47.png" />
+
+
 
 
 ## 总结
