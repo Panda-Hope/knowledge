@@ -85,3 +85,8 @@ export class ComputedRefImpl<T> {
 
 ## Watch观察器
 
+### watchEffect
+
+`watchEffect`是一个较为简单的`effect`观察器
+
+
