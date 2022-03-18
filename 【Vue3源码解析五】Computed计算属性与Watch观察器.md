@@ -120,7 +120,13 @@ if (isRef(source)) {
 
 在`watch`观察器中`getter`属于被观察的对象，而`watchJob`则是执行函数，与计算属性相同`watch`观察器中同样会构建`effect`用于依赖收集与组件更新。  
 
-`watchJob`的执行分为四种情况，当`immediate`属性存在时`watchJob`会被当做独立函数立即执行，
+`watchJob`的执行分为三种情况，当`immediate`属性存在时`watchJob`会被当做独立函数立即执行，当依赖被更新或者组件更新时，`effect`将会被运行。  
+
+而当`flush === 'post'`时，这个运行会被延后到组件刷新后的下一个微任务队列中。  
+
+当`watchJob`被执行时同样会分为两种情况，当被观察的是响应式数据时，其与`computed`计算属性相同会收集响应式的`dep`依赖，当依赖更新时才会被触发，  
+
+而当被观察的是函数时，这个`effect`会被关联到当前的`effectscope`作用域中，每当组件或者`effectscope`需要更新时，开始执行。
 
 ```typescript
 const job: SchedulerJob = () => {
