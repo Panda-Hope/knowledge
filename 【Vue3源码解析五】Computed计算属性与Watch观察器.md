@@ -85,9 +85,22 @@ export class ComputedRefImpl<T> {
 
 ## Watch观察器
 
+### Watch观察器的组成部分
+
+在 __Vue.js 3.0__ 中`watch`观察器存在`watchEffect`与`watch`函数两种，而其本质均是`doWatch`的变体函数。 
+
+一个完整的`watch`观察器主要包括两个部分：
+
+- Getter：被观察的属性，在watchEffect中是回调函数
+- SchedulerJob：被执行的回调
+
+### getter
+
 ### watchJob
 
-在 __Vue.js 3.0__ 中`watch`观察器存在`watchEffect`与`watch`函数两种，而其本质均是`doWatch`的变体函数。  
+ 
+
+其区别仅在于`getter`函数的定义罢了，对于一个`watch`观察器而言其最重要的便于其回调函数`SchedulerJob`何时去执行。
 
 ```typescript
 const job: SchedulerJob = () => {
@@ -128,6 +141,9 @@ const job: SchedulerJob = () => {
   }
 ```
 
+### 
+
+### watch的执行顺序
 
 
 
