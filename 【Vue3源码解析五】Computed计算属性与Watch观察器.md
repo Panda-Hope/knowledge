@@ -174,5 +174,13 @@ return () => {
 }
 ```
 
+## 总结
+
+本章我们详细的介绍了`Computed`计算属性与`Watch`观察器的运行机制。  
+
+本章内容并不复杂，读懂本章的核心仍然是在理解`effect`与`schduler`这两个模块，`Computed`与`Watch`均是在此基础上而来的。  
+
+对于`effect`与`schduler`模块请阅读本系列文章的对应章节。
+
 
 
