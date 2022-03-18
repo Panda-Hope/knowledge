@@ -24,15 +24,13 @@ export function computed<T>(
 
 `ComputedRefImpl`是`Computed`计算属性的实际控制器，每当创建一个新的计算属性`Computed`便会构造一个新的`ComputedRefImpl`类，  
 
-首先`ComputedRefImpl`为每一个计算属性构造了一个新的`effect`，这个`effect`用于收集计算属性的依赖，  
+首先`ComputedRefImpl`为每一个计算属性构造了一个新的`effect`，这个`effect`用于收集计算属性的依赖`dep`，  
 
-每当计算属性被引用时，执行`trackRefValue`函数将`get`中所遇到响应式数据的`dep`与之前所创建好的`effect`收集器完成绑定，  
+每当计算属性被引用时，执行`trackRefValue`函数将`get`中所遇到响应式数据的`dep`与之前所创建好的`effect`收集器完成绑定，从而完成计算属性对于其内部响应式数据的收集。  
 
-从而完成计算属性对于其内部响应式数据的收集。每当被收集的响应式数据更新时，`effect`会去执行`effect.run`操作将计算属性的更新推入下一个微任务更新队列中,  
+每当被收集的响应式数据更新时，`effect`会去执行`effect.run`操作将计算属性的更新推入下一个微任务更新队列中,  
 
-最后`effect`上面的`scheduler`回调函数将会被执行，将计算
-
-以告知计算属性需要被更新，最后，从而完成属性的计算操作。
+最后每当`_dirty`属性标识缓存本次计算所得到的结果，除非依赖被更新时`effect`上面的`scheduler`回调函数才会被执行，重新计算属性的值。
 
 ```typescript
 export class ComputedRefImpl<T> {
@@ -56,8 +54,8 @@ export class ComputedRefImpl<T> {
     // 创建新的effect
     this.effect = new ReactiveEffect(getter, () => {
       if (!this._dirty) {
-        this._dirty = true
-        triggerRefValue(this) // 触发
+        this._dirty = true // 依赖更新，重新计算计算属性值
+        triggerRefValue(this) 
       }
     })
     this.effect.computed = this
@@ -81,8 +79,6 @@ export class ComputedRefImpl<T> {
   }
 }
 ```
-
-
 
 
 
