@@ -92,9 +92,27 @@ export class ComputedRefImpl<T> {
 一个完整的`watch`观察器主要包括两个部分：
 
 - Getter：被观察的属性，在watchEffect中是回调函数
-- SchedulerJob：被执行的回调
+- SchedulerJob：被执行的回调函数
 
 ### getter
+
+getter存在三种不同情形，当被观察的是一个响应式数据`ref`或者`reactive`时，其返回的是被观察的响应式数据本身，  
+
+
+
+```typescript
+if (isRef(source)) {
+  getter = () => source.value
+  forceTrigger = isShallow(source)
+} else if (isReactive(source)) {
+  getter = () => source
+  deep = true
+} else if (isArray(source)) {
+  getter = () => {...}
+} else if (isFunction(source)) {
+  getter = () => callWithErrorHandling(source, instance, ErrorCodes.WATCH_GETTER)
+}
+```
 
 ### watchJob
 
