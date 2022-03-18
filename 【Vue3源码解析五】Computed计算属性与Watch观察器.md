@@ -32,7 +32,7 @@ export function computed<T>(
 
 最后`dirty`属性将标识缓存本次计算所得到的结果，除非依赖被更新时`effect`上面的`scheduler`回调函数才会被执行`dirty`变回到`true`,  
 
-开始重新计算计算属性的值。
+开始重新执行计算属性的结果值。
 
 ```typescript
 export class ComputedRefImpl<T> {
@@ -81,8 +81,6 @@ export class ComputedRefImpl<T> {
   }
 }
 ```
-
-
 
 
 ## Watch观察器
