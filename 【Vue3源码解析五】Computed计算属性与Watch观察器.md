@@ -87,6 +87,47 @@ export class ComputedRefImpl<T> {
 
 ### watchJob
 
+在 __Vue.js 3.0__ 中`watch`观察器存在`watchEffect`与`watch`函数两种，而其本质均是`doWatch`的变体函数。  
+
+```typescript
+const job: SchedulerJob = () => {
+    if (!effect.active) {
+      return
+    }
+    if (cb) {
+      // watch(source, cb)
+      const newValue = effect.run()
+      if (
+        deep ||
+        forceTrigger ||
+        (isMultiSource
+          ? (newValue as any[]).some((v, i) =>
+              hasChanged(v, (oldValue as any[])[i])
+            )
+          : hasChanged(newValue, oldValue)) ||
+        (__COMPAT__ &&
+          isArray(newValue) &&
+          isCompatEnabled(DeprecationTypes.WATCH_ARRAY, instance))
+      ) {
+        // cleanup before running cb again
+        if (cleanup) {
+          cleanup()
+        }
+        callWithAsyncErrorHandling(cb, instance, ErrorCodes.WATCH_CALLBACK, [
+          newValue,
+          // pass undefined as the old value when it's changed for the first time
+          oldValue === INITIAL_WATCHER_VALUE ? undefined : oldValue,
+          onCleanup
+        ])
+        oldValue = newValue
+      }
+    } else {
+      // watchEffect
+      effect.run()
+    }
+  }
+```
+
 
 
 
