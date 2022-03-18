@@ -22,6 +22,68 @@ export function computed<T>(
 
 ### ComputedRefImpl
 
+`ComputedRefImpl`是`Computed`计算属性的实际控制器，每当创建一个新的计算属性`Computed`便会构造一个新的`ComputedRefImpl`类，  
+
+首先`ComputedRefImpl`为每一个计算属性构造了一个新的`effect`，这个`effect`用于收集计算属性的依赖，  
+
+每当计算属性被引用时，执行`trackRefValue`函数将`get`中所遇到响应式数据的`dep`与之前所创建好的`effect`收集器完成绑定，  
+
+从而完成计算属性对于其内部响应式数据的收集。每当被收集的响应式数据更新时，`effect`会去执行`effect.run`操作将计算属性的更新推入下一个微任务更新队列中,  
+
+最后`effect`上面的`scheduler`回调函数将会被执行，将计算
+
+以告知计算属性需要被更新，最后，从而完成属性的计算操作。
+
+```typescript
+export class ComputedRefImpl<T> {
+  public dep?: Dep = undefined
+
+  private _value!: T
+  public readonly effect: ReactiveEffect<T>
+
+  public readonly __v_isRef = true
+  public readonly [ReactiveFlags.IS_READONLY]: boolean
+
+  public _dirty = true // 判断当前计算属性是否需要更新
+  public _cacheable: boolean // 是否缓存数据
+
+  constructor(
+    getter: ComputedGetter<T>,
+    private readonly _setter: ComputedSetter<T>,
+    isReadonly: boolean,
+    isSSR: boolean
+  ) {
+    // 创建新的effect
+    this.effect = new ReactiveEffect(getter, () => {
+      if (!this._dirty) {
+        this._dirty = true
+        triggerRefValue(this) // 触发
+      }
+    })
+    this.effect.computed = this
+    this.effect.active = this._cacheable = !isSSR
+    this[ReactiveFlags.IS_READONLY] = isReadonly
+  }
+
+  get value() {
+    // the computed ref may get wrapped by other proxies e.g. readonly() #3376
+    const self = toRaw(this)
+    trackRefValue(self) // 收集依赖
+    if (self._dirty || !self._cacheable) {
+      self._dirty = false
+      self._value = self.effect.run()! // 执行计算属性更新操作
+    }
+    return self._value
+  }
+
+  set value(newValue: T) {
+    this._setter(newValue)
+  }
+}
+```
+
+
+
 
 
 
