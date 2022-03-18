@@ -98,7 +98,9 @@ export class ComputedRefImpl<T> {
 
 getter存在三种不同情形，当被观察的是一个响应式数据`ref`或者`reactive`时，其返回的是被观察的响应式数据本身，  
 
+而当需要同时观察多个数据时，其返回的则是被观察的响应式数据的一维数据，与计算属性相同，这里的数据同样会被依赖收集。  
 
+最后当被观察的是一个函数时，其返回的则是一个被`callWithErrorHandling`包裹的高阶函数。
 
 ```typescript
 if (isRef(source)) {
@@ -116,9 +118,9 @@ if (isRef(source)) {
 
 ### watchJob
 
- 
+在`watch`观察器中`getter`属于被观察的对象，而`watchJob`则是执行函数，与计算属性相同`watch`观察器中同样会构建`effect`用于依赖收集与组件更新。  
 
-其区别仅在于`getter`函数的定义罢了，对于一个`watch`观察器而言其最重要的便于其回调函数`SchedulerJob`何时去执行。
+`watchJob`的执行分为四种情况，当`immediate`属性存在时`watchJob`会被当做独立函数立即执行，
 
 ```typescript
 const job: SchedulerJob = () => {
@@ -159,9 +161,18 @@ const job: SchedulerJob = () => {
   }
 ```
 
-### 
+### stopWatcher
 
-### watch的执行顺序
+`watch`函数会返回一个`stop`函数，当执行`stop`时，`watch`会销毁这个`effect`并从当前的`effectScope`中移除。
+
+```typescript
+return () => {
+  effect.stop()
+  if (instance && instance.scope) {
+    remove(instance.scope.effects!, effect)
+  }
+}
+```
 
 
 
