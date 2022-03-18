@@ -30,7 +30,7 @@ export function computed<T>(
 
 每当被收集的响应式数据更新时，`effect`会去执行`effect.run`操作将计算属性的更新推入下一个微任务更新队列中，更新视图。  
 
-最后每当`_dirty`属性标识缓存本次计算所得到的结果，除非依赖被更新时`effect`上面的`scheduler`回调函数才会被执行，重新计算属性的值。
+最后`dirty`属性将标识缓存本次计算所得到的结果，除非依赖被更新时`effect`上面的`scheduler`回调函数才会被执行`dirty`变回到`true`，开始重新计算属性的值。
 
 ```typescript
 export class ComputedRefImpl<T> {
