@@ -1,5 +1,8 @@
 # 知识库
 
+### [工具是第一生产力](https://github.com/Panda-Hope/knowledge/blob/master/%E5%B7%A5%E5%85%B7%E6%98%AF%E7%AC%AC%E4%B8%80%E7%94%9F%E4%BA%A7%E5%8A%9B.md)
+日期：2022.3.10
+
 ### [【Vue3源码解析六】Compile模板编译器](https://github.com/Panda-Hope/knowledge/blob/master/%E3%80%90Vue3%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%85%AD%E3%80%91Compile%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91%E5%99%A8.md)
 日期：2022.5.12
 
