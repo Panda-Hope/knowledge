@@ -27,7 +27,7 @@ WooshPay官网需要一个官方的API文档系统，用于向客户以及第三
 ## 设计流程
 
 ### 设计流程图简要概览：
-![点击图片，进入可视化编辑](/tfl/pictures/202204/tapd_32859221_1649835170_24.png){data-control=tapd-graph data-origin-xml=id:1168857352001000002 data-graph-token=3e7f88f2ab91612bed614699fb743a1d}
+<img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/%E6%88%AA%E5%B1%8F2022-05-04%2009.26.23.png" />
 
 ### 流程说明：
 1. API定义：
