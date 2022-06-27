@@ -46,13 +46,15 @@
 
 ### 请求开始渲染收银台：
 
-<img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/image2022-6-27_19-11-16.png" width=400 />
+<img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/image2022-6-27_19-20-42.png" width=400 />
 
 在收银台请求环节，我们可以看到网络请求仍然是主要耗时原因，但是同样可以看到收银台请求渲染的335ms渲染速度是优于SDK加载的665ms的，
 
 其主要原因在于收银台请求的TCP包体制大小明显小于SDK TCP包的体积大小，因此压缩请求资源体积大小同样是很重要的一部分。
 
 ### 加载收银台渲染页面：
+
+<img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/image2022-6-27_19-35-54.png" width=400 />
 
 
 到了收银台加载页面，我们开始看到渲染速度又开始变得缓慢起来，但是收银台页面本事的体积大小却并没有多大，
@@ -76,6 +78,8 @@
 ```
 
 加载CSS、JS开始渲染收银台：
+
+<img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/image2022-6-27_19-51-55.png" width="400" />
 
 到了收银台页面，我们看到由于iframe已经完成加载，此时的渲染速度又开始再次慢了下来，但由于TCP请求本身耗时较长，
 
