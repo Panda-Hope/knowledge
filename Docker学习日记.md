@@ -24,5 +24,15 @@ Docker采用C/S架构，采用镜像、容器、卷、网络等来管理和开�
 
 <img src="https://github.com/Panda-Hope/panda-hope.github.io/blob/master/static/img/architecture.svg" width="800" />
 
+## 初识Docker
+
+### 镜像
+
+```
+docker image pull // 拉取镜像
+docker image ls // 列出本地镜像
+docker build
+```
+
 
 
