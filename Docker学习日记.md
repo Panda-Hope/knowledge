@@ -32,14 +32,22 @@ Docker采用C/S架构，采用镜像、容器、卷、网络等来管理和开�
 什么是镜像？，简要概之：镜像即是计算机磁盘上面的文件，比如/file、/usr这种，镜像就像一个模板，用于构建一个运行时容器执行命令所需的内容。
 在Docker中镜像是可以继承的，比如我们可以官方`Nginx`的镜像中添加自己常用的Nginx的配置，从而构建一个属于自身的Nginx镜像，以方便后续的部署和维护。  
 
-
+下面我们来些镜像的常用命令：
 ```
 docker image pull // 拉取镜像
 docker image ls // 列出本地镜像
-docker build
+docker image rm // 删除镜像
+docker image inspect // 查看镜像详情
+docker image build // 从Dockerfile构建一个新的镜像
 ```
 
 ### 容器
+容器是一个可运行的软件程序，容器执行从镜像中的
+
+下面我们来些镜像的常用命令：
+```
+docker run // 
+```
 
 ### 卷
 
