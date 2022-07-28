@@ -36,18 +36,22 @@ Docker采用C/S架构，采用镜像、容器、卷、网络等来管理和开�
 ```
 docker image pull // 拉取镜像
 docker image ls // 列出本地镜像
-docker image rm // 删除镜像
+docker image rmi // 删除镜像
 docker image inspect // 查看镜像详情
 docker image build // 从Dockerfile构建一个新的镜像
 ```
 
 ### 容器
-容器是一个可运行的软件程序，容器执行从镜像中的命令，
+容器是一个可运行的软件程序，它执行镜像文件中命令，开始运行程序，容器可移植到不同平台如：Linux、Window中运行，
+同时各个容器之间相互独立，互不影响。Docker奉行一个容器执行一件事情的原则，即每个容器当且仅当做好自己的事情，
 
 下面我们来些容器的常用命令：
 
 ```
-docker run // 
+docker run // 从镜像中运行一个容器
+docker ps // 查看运行中的容器列表
+docker stop // 停止运行一个容器
+docker rm // 删除一个容器
 ```
 
 ### 卷
