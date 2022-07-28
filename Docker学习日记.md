@@ -49,6 +49,7 @@ docker image build // 从Dockerfile构建一个新的镜像
 
 ```
 docker run // 从镜像中运行一个容器
+docker restart // 重新启动一个容器
 docker ps // 查看运行中的容器列表
 docker stop // 停止运行一个容器
 docker rm // 删除一个容器
