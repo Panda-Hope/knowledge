@@ -77,11 +77,70 @@ docker network connect  // 将运行中的容器添加到网络
 docker inspect // 检查容器的详细信息
 docker log // 查看容器运行日志
 docker compose up // 开始执行compose文件，创建并运行容器
-docker compose start // 开始
-docker compose stop // 
+docker compose start // 开启服务
+docker compose stop //  停止服务
 ```
 
 ## 牛刀小试
+
+在理解了Docker基本的运行原理之后，我们认识到Docker的本质即是一个一个独立的虚拟机容器，由于Docker奉行`ach container should do one thing and do it well`即一个容器当且应当
+做一件事情的原则，我们开始为web服务的各个模块构建自身的docker容器。
+
+### Nginx
+首先我们开始构建服务器的Docker容器如下：
+
+```
+FROM nginx
+COPY dist/ /usr/share/nginx/html/
+COPY default.conf /etc/nginx/conf.d/default.conf
+```
+这段代码指示Docker构建一个Nginx镜像，由于我们的前端采用的是SPA框架，我们直接将打包完成的dist目录替换掉Nginx的静态文件目录，并替换掉Nginx的默认配置，以下是我们的Nginx配置：  
+
+```
+server {
+    listen       3000;
+    root /usr/share/nginx/html;
+
+    gzip on;
+    gzip_comp_level 6;
+    gzip_types text/plain application/x-javascript text/css text/javascript;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+这段配置代码指示Nginx服务将接收到的全部请求均转发到index.html文件，这是SPA框架比如React、Vue常见的配置。
+
+### Server
+在配置完成前端项目之后，我们开始配置自己的服务：
+```
+FROM node:18
+
+WORKDIR /app
+
+ENV NODE_OPTIONS="--openssl-legacy-provider"
+
+ENV EGG_SERVER_ENV="prod"
+
+# 将代码&依赖拷贝至镜像中
+COPY ["package.json", "package-lock.json*", "./"]
+
+RUN npm install
+
+# 复制运行代码
+COPY [".", "."]
+
+RUN npm run tsc
+
+# node 服务启动的端口
+EXPOSE 4000
+
+# node 服务启动命令
+CMD [ "npm", "run", "start" ]
+```
+
+
 
 ## 使用docker-compose
 
