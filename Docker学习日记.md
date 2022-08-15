@@ -71,13 +71,32 @@ docker rm // 删除一个容器
 除了镜像、容器以及卷以外，我们还有一些常用的Docker命令，用于我们一些日常的操作。
 
 ```
+docker exec -it `container_name` bash // 进入容器内执行shell会话
+docker network create // 创建docker网络
+docker network connect  // 将运行中的容器添加到网络
+docker inspect // 检查容器的详细信息
+docker log // 查看容器运行日志
+docker compose up // 开始执行compose文件，创建并运行容器
+docker compose start // 开始
+docker compose stop // 
 ```
 
 ## 牛刀小试
 
 ## 使用docker-compose
 
+### 开发环境配置
+
+### 生产环境配置
+
 ## 服务部署
+
+### CI/CD
+
+### 服务监测
+
+### 日志接入
+
 
 
 
