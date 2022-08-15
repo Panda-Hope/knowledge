@@ -131,6 +131,7 @@ RUN npm install
 # 复制运行代码
 COPY [".", "."]
 
+# 编译Typescript代码
 RUN npm run tsc
 
 # node 服务启动的端口
@@ -139,8 +140,23 @@ EXPOSE 4000
 # node 服务启动命令
 CMD [ "npm", "run", "start" ]
 ```
+这段代码的指示如下：
+1. 从Node复制镜像
+2. 将当前工作目录切换到/app
+3. 设置Node环境变量
+4. 将package.json复制到当前目录
+5. 安装node_modules依赖包
+6. 将程序代码复制进入工作目录
+7. 编译Typescript代码
+8. 将程序运行端口指定为4000
+9. 开始运行服务程序  
+
+由此，我们得到了一个在4000端口运行的Node服务端程序。
 
 ### Mysql
+最后，我们开始配置数据库，我们便可以得到一个简单的现代web架构的雏形，由Nginx服务器、前端SPA页面、Node服务端程序与MySQL数据库共同组成。
+```
+```
 
 
 
