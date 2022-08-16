@@ -230,7 +230,11 @@ networks:
     driver: bridge
 ```
 
-在上面的示例中，我们共构建了四个服务Nginx、Web、Server、MySQL，其中Nginx与MySQL我们直接从Docker hub的远程镜像中拉取，因为他们仅仅需要一些
+在上面的示例中，我们共构建了四个服务Nginx、Web、Server、MySQL，其中Nginx与MySQL我们直接从Docker hub的远程镜像中拉取，因为他们仅仅需要修改一些配置文件。
+而对于我们服务所需要的核心部分前端SPA页面与Web接口服务，我们则是通过其项目自身的Dockerfile来构建相应的镜像，并将相应的环境配置与数据库密码等相关隐私数据放置于其中，
+我们仅在compose文件中声明如何启动这个服务。  
+
+值得一提的是，我们在compose文件中，新增了network与volume
 
 ## 服务部署
 
