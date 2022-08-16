@@ -230,6 +230,8 @@ networks:
     driver: bridge
 ```
 
+在上面的示例中，我们共构建了四个服务Nginx、Web、Server、MySQL，其中Nginx与MySQL我们直接从Docker hub的远程镜像中拉取，因为他们仅仅需要一些
+
 ## 服务部署
 
 在经过本地服务器的测试之后，现在是时候将服务部署到我们正式的生产服务器上面去了。首先，我们要做的第一件事便是进行CI与CD的集成。
