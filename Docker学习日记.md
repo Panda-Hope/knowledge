@@ -169,11 +169,71 @@ ENV MYSQL_ROOT_PASSWORD=password
 
 ## 使用docker-compose
 
+刚刚，我们已经通过Docker来构建好了一个web服务架构所需的各个应用，但是目前各个应用之间的Docker构建任然是相互独立的，
+这个时候如果我们想一键部署或者迁移整个服务当怎么处理呢？。docker-compose便是用来解决此问题而来的。  
+
+Compose是一个用来配置多个Docker容器的应用，你可以通过一个`yaml`配置文件，来一键配置你的服务。接下来，我们开始创建自己的compose配置文件。
+
+```
+version: "3.9"
+
+services:
+  # Nginx服务器
+  nginx:
+    image: nginx:latest
+    networks:
+      - net
+    volumes:
+      - nginx-log:/var/log/nginx/
+    ports:
+      - "80:80"
+  # 前端SPA页面
+  web:
+    build: ./webSpa
+    networks:
+      - net
+    environment:
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+  # 服务端
+  server:
+    build: ./server
+    networks:
+      - net
+    environment:
+      NODE_ENV: production
+    volumes:
+      - server-log:logs
+    ports:
+      - "4000:4000"
+  # mysql数据库
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3006"
+    volumes:
+      - mysql-data:var/lib/mysql
+
+volumes:
+  nginx-log:
+    driver: local
+  server-log:
+    driver: local
+  mysql-data:
+    driver: local
+
+networks:
+  net:
+    driver: bridge
+```
 
 
-### 开发环境配置
+### compose配置
 
-### 生产环境配置
+### 配置开发环境
 
 ## 服务部署
 
