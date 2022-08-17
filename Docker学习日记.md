@@ -242,10 +242,60 @@ networks:
 在经过本地服务器的测试之后，现在是时候将服务部署到我们正式的生产服务器上面去了。首先，我们要做的第一件事便是进行CI与CD的集成。
 
 ### CI/CD
-我们
+
+什么是CI/CD？，CI/CD即持续集成与部署，因为在实际过程中，我们并不希望每次发布代码都需要自己手动构建新的镜像并重启容器，这是非常重复的工作，
+这里我们使用的GitHub提供的CI流水线，下面是我们的CI配置的简单示例：
+
+```
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  schedule:
+    - cron: '0 2 * * *'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [8]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - name: Checkout Git Source
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install Dependencies
+      run: npm i -g npminstall@5 && npminstall
+
+    - name: Continuous Integration
+      run: npm run ci
+
+    - name: Code Coverage
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+```
 
 ### 服务监测与日志接入
-当容器已经在服务器上运行了之后，这个时候对于各个容器的运行状况的监测便是非常重要的事情了，我们要保证自身的服务器时刻处于正常运行状态，当容器宕机时要及时启用
+当容器已经在服务器上运行了之后，这个时候对于各个容器的运行状况的监测便是非常重要的事情了，我们要保证自身的服务器时刻处于正常运行状态，
+当容器遇到宕机等情况时要及时启用容灾方案，同时也要对网关、服务、数据库的日志进行接入，方便对线上问题进行排查。
+
 
 ## 总结
 总得来说，Docker的出现极大了改善运维部署的状况，将以前独立的各个服务器模块，进行了统一的管理，同时Docker的容器化也为容器提供了完全独立化的运行条件，
